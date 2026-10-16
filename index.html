@@ -8,7 +8,7 @@
 <style>
 :root{
   --leaf-bg:#DCEFE2;
-  --leaf-bg-2:#EAF6ED;
+  --leaf-bg-2:#D7EDDE;
   --pine-dark:#123B2A;
   --pine-ink:#0B271D;
   --ink:#14291F;
@@ -17,7 +17,7 @@
   --mint-pill:#BFE6CC;
   --wood:#9A6B3F;
   --coal:#101511;
-  --card:#F2FAF4;
+  --card:#CDE6D4;
   --line:rgba(20,82,58,.16);
   --paper-light:#EAF5ED;
   --shadow:0 18px 50px rgba(11,39,29,.16);
@@ -163,7 +163,7 @@ header{
 }
 @keyframes cardIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .m-card::after{content:"";position:absolute;inset-inline:0;inset-block-end:0;height:3px;background:var(--wood);opacity:0;transition:opacity .35s}
-.m-card .ph{aspect-ratio:4/5;overflow:hidden;border-radius:20px 20px 0 0;background:#dfeee4}
+.m-card .ph{aspect-ratio:4/5;overflow:hidden;border-radius:20px 20px 0 0;background:#C9E5D3}
 .m-card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease-out)}
 .m-card .tx{padding:.9rem 1rem 1.1rem}
 .m-card .nm{font-weight:700;font-size:1.05rem;color:var(--pine-dark);line-height:1.6}
@@ -199,7 +199,7 @@ header{
 @keyframes modalIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 .modal.closing{animation:modalOut .25s var(--ease-out)}
 @keyframes modalOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(14px)}}
-.modal .mphoto{aspect-ratio:4/5;overflow:hidden;background:#dfeee4}
+.modal .mphoto{aspect-ratio:4/5;overflow:hidden;background:#C9E5D3}
 .modal .mphoto img{width:100%;height:100%;object-fit:cover}
 .modal .mbody{padding:2rem 2.2rem;display:flex;flex-direction:column;gap:.7rem;overflow-y:auto}
 .modal .mbody h3{font-size:1.6rem;color:var(--pine-dark);line-height:1.6}
@@ -271,6 +271,122 @@ header{
 .lb .lb-next{inset-inline-end:1.2rem}
 @media(max-width:760px){.lb .lb-nav{width:56px;height:56px}}
 
+/* ---------- cart add button (menu card + modal) ---------- */
+.add-btn{
+  font-family:inherit;font-weight:800;cursor:pointer;border:none;
+  background:var(--pine);color:#fff;border-radius:999px;
+  padding:.55rem 1.6rem;font-size:.95rem;transition:transform .2s,background .2s,box-shadow .2s;
+  display:inline-flex;align-items:center;gap:.45rem;
+}
+.add-btn:hover{background:var(--pine-dark);box-shadow:0 8px 22px rgba(20,82,58,.35);transform:translateY(-1px)}
+.add-btn:active{transform:scale(.96)}
+.m-card .add-wrap{padding:0 1rem .9rem}
+.m-card .add-btn{width:100%;justify-content:center;padding:.5rem 1rem;font-size:.9rem}
+.modal .add-btn{margin-block-start:.6rem;width:100%;justify-content:center;padding:.85rem 1.5rem;font-size:1rem}
+@media(max-width:760px){.m-card .add-wrap{padding:0 .7rem .7rem}.m-card .add-btn{font-size:.8rem;padding:.45rem .8rem}}
+
+/* ---------- header cart button ---------- */
+.head-actions{display:flex;align-items:center;gap:.6rem}
+.cart-btn{
+  font-family:inherit;cursor:pointer;position:relative;
+  border:1.5px solid var(--pine);color:var(--pine);background:transparent;
+  border-radius:999px;padding:.3rem 1rem;font-size:1rem;transition:.25s;
+  display:inline-flex;align-items:center;gap:.35rem;
+}
+.cart-btn:hover{background:var(--pine);color:#fff}
+.cart-count{
+  position:absolute;inset-block-start:-9px;inset-inline-end:-7px;
+  min-width:22px;height:22px;border-radius:999px;padding:0 5px;
+  background:var(--pine-dark);color:#fff;font-size:.75rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;line-height:1;
+  box-shadow:0 4px 10px rgba(11,39,29,.35);
+}
+.cart-count.zero{display:none}
+.cart-btn.pop{animation:pop .4s var(--ease-spring)}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
+
+/* ---------- cart drawer ---------- */
+.cart-ov{position:fixed;inset:0;z-index:140;background:rgba(11,39,29,.6);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  opacity:0;pointer-events:none;transition:opacity .3s}
+.cart-ov.open{opacity:1;pointer-events:auto}
+.cart{
+  position:fixed;top:0;bottom:0;width:min(420px,94vw);z-index:141;
+  background:var(--card);box-shadow:-18px 0 60px rgba(11,39,29,.3);
+  display:flex;flex-direction:column;transition:transform .38s var(--ease-out);
+}
+html[dir="rtl"] .cart{left:0;transform:translateX(-108%)}
+html[dir="ltr"] .cart{right:0;transform:translateX(108%)}
+.cart-ov.open .cart{transform:none}
+.cart-head{display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 1.3rem;border-block-end:1px solid var(--line);flex:0 0 auto}
+.cart-head h3{font-size:1.25rem;color:var(--pine-dark);line-height:1.6}
+.cart-x{
+  width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;font-family:inherit;font-size:1.1rem;
+  background:var(--mint-pill);color:var(--pine-dark);transition:.2s;flex:0 0 auto;
+}
+.cart-x:hover{background:var(--pine);color:#fff}
+.cart-body{flex:1;overflow-y:auto;padding:1.1rem 1.3rem;display:flex;flex-direction:column;gap:.9rem}
+.cart-empty{text-align:center;color:var(--muted);padding:3rem 1rem;font-size:1.05rem}
+.cart-row{
+  display:grid;grid-template-columns:64px 1fr auto;gap:.8rem;align-items:center;
+  background:#CFE9D7;border:1px solid var(--line);border-radius:16px;padding:.6rem .7rem;
+}
+.cart-row img{width:64px;height:64px;object-fit:cover;border-radius:12px}
+.cart-row .c-nm{font-weight:700;color:var(--pine-dark);font-size:.95rem;line-height:1.7}
+.cart-row .c-line{font-weight:800;color:var(--pine);font-size:.95rem;margin-block-start:.15rem}
+.cart-row .c-line .unit{font-weight:400;font-size:.72rem;color:var(--muted)}
+.stepper{display:flex;align-items:center;gap:.45rem;direction:ltr}
+.stepper button{
+  width:30px;height:30px;border-radius:50%;border:1.5px solid var(--pine);background:transparent;
+  color:var(--pine);font-size:1.05rem;font-weight:800;cursor:pointer;font-family:inherit;
+  display:flex;align-items:center;justify-content:center;transition:.2s;line-height:1;
+}
+.stepper button:hover{background:var(--pine);color:#fff}
+.stepper .q{min-width:26px;text-align:center;font-weight:800;color:var(--pine-dark)}
+.cart-total{
+  display:flex;align-items:center;justify-content:space-between;flex:0 0 auto;
+  border-block-start:2px solid var(--line);padding-block-start:1rem;margin-block-start:.4rem;
+}
+.cart-total .lbl{font-weight:800;color:var(--pine-dark);font-size:1.05rem}
+.cart-total .val{font-weight:800;font-size:1.4rem;color:var(--pine)}
+.cart-total .val .unit{font-weight:400;font-size:.8rem;color:var(--muted)}
+.cart-actions{flex:0 0 auto;display:flex;flex-direction:column;gap:.7rem;padding-block-end:.6rem}
+.checkout-btn{
+  font-family:inherit;font-size:1.05rem;font-weight:800;cursor:pointer;border:none;
+  background:var(--pine);color:#fff;border-radius:999px;padding:.9rem 1.5rem;transition:.25s;
+}
+.checkout-btn:hover{background:var(--pine-dark);box-shadow:0 10px 26px rgba(20,82,58,.35)}
+.ghost-btn{
+  font-family:inherit;font-size:.95rem;font-weight:700;cursor:pointer;
+  background:transparent;color:var(--pine-dark);border:1.5px solid var(--line);border-radius:999px;
+  padding:.7rem 1.5rem;transition:.25s;
+}
+.ghost-btn:hover{border-color:var(--pine);color:var(--pine)}
+.sum-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:.5rem 0;border-block-end:1px dashed var(--line);font-size:.95rem}
+.sum-row .s-nm{color:var(--pine-dark);font-weight:700}
+.sum-row .s-det{color:var(--muted);font-size:.85rem}
+.sum-row .s-val{font-weight:800;color:var(--pine);white-space:nowrap}
+.pay-btn{
+  font-family:inherit;font-size:1rem;font-weight:800;border-radius:999px;padding:.9rem 1.5rem;
+  border:1px dashed rgba(78,102,90,.5);background:rgba(78,102,90,.14);color:var(--muted);
+  cursor:not-allowed;width:100%;
+}
+.pay-note{font-size:.82rem;color:var(--muted);text-align:center;line-height:1.9;margin-block-start:-.3rem}
+.cart-sec-lbl{font-weight:800;color:var(--pine-dark);font-size:1rem;margin-block-start:.4rem}
+
+/* ---------- toast ---------- */
+.toast{
+  position:fixed;inset-block-end:1.6rem;inset-inline:0;z-index:200;display:flex;justify-content:center;
+  pointer-events:none;opacity:0;transform:translateY(14px);transition:.3s;
+}
+.toast.show{opacity:1;transform:none}
+.toast span{
+  background:var(--pine-dark);color:#fff;font-weight:700;font-size:.95rem;
+  border-radius:999px;padding:.65rem 1.6rem;box-shadow:0 14px 36px rgba(11,39,29,.4);
+}
+
 /* ---------- visit ---------- */
 .visit{background:var(--leaf-bg-2)}
 .visit-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-block-start:2.2rem}
@@ -309,7 +425,13 @@ footer .f-en{opacity:.7;font-size:.85rem;margin-block-start:.3rem}
       <li><a href="#gallery" data-fa="گالری" data-en="Gallery">گالری</a></li>
       <li><a href="#visit" data-fa="تماس" data-en="Visit">تماس</a></li>
     </ul>
-    <button class="lang-btn" id="langToggle" aria-label="تغییر زبان">EN</button>
+    <div class="head-actions">
+      <button class="cart-btn" id="cartBtn" aria-label="سبد خرید">
+        <span aria-hidden="true">🧺</span>
+        <span class="cart-count zero" id="cartCount">۰</span>
+      </button>
+      <button class="lang-btn" id="langToggle" aria-label="تغییر زبان">EN</button>
+    </div>
   </div>
 </header>
 
@@ -475,6 +597,20 @@ footer .f-en{opacity:.7;font-size:.85rem;margin-block-start:.3rem}
   </div>
 </footer>
 
+<!-- cart drawer -->
+<div class="cart-ov" id="cartOv">
+  <aside class="cart" id="cartPanel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+    <div class="cart-head">
+      <h3 id="cartTitle">سبد خرید</h3>
+      <button class="cart-x" id="cartX" aria-label="بستن">✕</button>
+    </div>
+    <div class="cart-body" id="cartBody"></div>
+  </aside>
+</div>
+
+<!-- toast -->
+<div class="toast" id="toast"><span id="toastMsg"></span></div>
+
 <!-- item detail modal -->
 <div class="modal-ov" id="modalOv">
   <div class="modal" id="modalPanel" role="dialog" aria-modal="true" aria-labelledby="modalName">
@@ -489,7 +625,7 @@ footer .f-en{opacity:.7;font-size:.85rem;margin-block-start:.3rem}
         <span class="val" id="modalPriceVal"></span>
         <span class="unit" id="modalPriceUnit"></span>
       </div>
-      <button class="order-cta" id="orderCta" disabled></button>
+      <div id="modalActions"></div>
     </div>
   </div>
 </div>
@@ -536,13 +672,13 @@ var TABS={
 /* tab, fa, en, price (null = no price), desc fa/en, photo file, object-position */
 var MENU=[
  ["hot","اسپرسو تک","Espresso","۸۰٬۰۰۰","شات غلیظ و عمیق با کرمای طلایی؛ شروع هر روز خوب.","A thick, deep shot with golden crema — the start of every good day.","espresso","50% 40%"],
- ["hot","اسپرسو دبل","Espresso","۱۰۰٬۰۰۰","دو برابر شدت، دو برابر عطر؛ برای روزهای جدی.","Twice the intensity, twice the aroma — for serious days.","espresso","50% 68%"],
+ ["hot","اسپرسو دبل","Double Espresso","۱۰۰٬۰۰۰","دو برابر شدت، دو برابر عطر؛ برای روزهای جدی.","Twice the intensity, twice the aroma — for serious days.","espresso-double","50% 50%"],
  ["hot","آمریکانو","Americano","۱۲۰٬۰۰۰","ساده و صاف، طعم واقعی دانه بدون هیچ پرده‌ای.","Simple and straight — the bean's true flavour, no filter.","americano","50% 50%"],
  ["hot","کورتادو","Cortado","۱۳۰٬۰۰۰","تعادل دقیق اسپرسو و شیر؛ کوچک اما کامل.","A precise balance of espresso and milk — small but complete.","cortado","50% 50%"],
  ["hot","لاته","Latte","۲۰۰٬۰۰۰","ابریشم شیر روی اسپرسو، با امضای کاج نوژه.","Silky milk over espresso, signed with the Nozhe pine.","latte","50% 50%"],
  ["hot","موکا","Mocha","۲۲۰٬۰۰۰","دیدار قهوه و شکلات؛ شیرین، گرم و دلنشین.","Where coffee meets chocolate — sweet, warm, and comforting.","mocha","50% 50%"],
  ["hot","ماسالا","Masala Chai","۱۸۰٬۰۰۰","ادویه‌های گرم شرقی در آغوش شیر داغ.","Warm eastern spices cradled in hot milk.","masala-chai","50% 50%"],
- ["hot","قهوه ماسالا","Masala Coffee","۱۳۰٬۰۰۰","اسپرسو با ضربه‌ی ادویه؛ بیدارکننده‌ای متفاوت.","Espresso with a spice kick — a different kind of wake-up.","masala-chai","50% 22%"],
+ ["hot","قهوه ماسالا","Masala Coffee","۱۳۰٬۰۰۰","اسپرسو با ضربه‌ی ادویه؛ بیدارکننده‌ای متفاوت.","Espresso with a spice kick — a different kind of wake-up.","masala-coffee","50% 22%"],
  ["hot","چای کرک","Karak Tea","۱۸۰٬۰۰۰","چای غلیظ عربی با شیر و هل؛ آرامش در فنجان.","Bold Arabic tea with milk and cardamom — calm in a cup.","karak-tea","50% 50%"],
  ["hot","کاپوچینو","Cappuccino","۱۶۰٬۰۰۰","کلاسیک ایتالیایی با فوم مخملی و پودر کاکائو.","The Italian classic with velvety foam and cocoa dust.","cappuccino","50% 50%"],
  ["hot","شیر نسکافه","Instant Coffee","۱۵۰٬۰۰۰","خاطره‌ی شیرین قدیمی؛ ساده، گرم و صمیمی.","A sweet old memory — simple, warm, and familiar.","instant-coffee","50% 50%"],
@@ -557,18 +693,18 @@ var MENU=[
  ["cold","شیک بادام‌زمینی","Peanut Shake",null,"کرمی، مغذی و سیرکننده؛ انرژیِ واقعی در لیوان.","Creamy, nourishing, and filling — real energy in a glass.","peanut-shake","50% 50%"],
  ["cold","شیر انبه","Mango Shake",null,"انبه‌ی رسیده با شیر سرد؛ طعم تابستانِ استوایی.","Ripe mango with cold milk — a taste of tropical summer.","mango-shake","50% 50%"],
  ["cold","لیموناد","Lemonade","۲۰۰٬۰۰۰","ترش و تازه با نعناع؛ نجات‌دهنده‌ی روزهای گرم.","Sour and fresh with mint — the saviour of hot days.","lemonade","50% 50%"],
- ["cold","دمنوش روز","Herbal Tea",null,"ترکیب هر روزِ ما از گیاهان آرام‌بخش؛ بپرسید امروز چیست.","Our daily blend of calming herbs — ask what's brewing today.","karak-tea","50% 30%"],
+ ["cold","دمنوش روز","Herbal Tea",null,"ترکیب هر روزِ ما از گیاهان آرام‌بخش؛ بپرسید امروز چیست.","Our daily blend of calming herbs — ask what's brewing today.","herbal-tea","50% 30%"],
  ["cold","کیک روز","Cake","۱۶۰٬۰۰۰","تازه از فر، هر روز یک سورپرایز؛ همراهِ وفادار قهوه.","Fresh from the oven, a new surprise daily — coffee's loyal companion.","cake","50% 55%"],
  ["cold","املت","Omelette","۲۲۰٬۰۰۰","تخم‌مرغِ تازه با سبزیجات؛ صبحانه‌ای که سیرت می‌کند.","Fresh eggs with vegetables — a breakfast that truly satisfies.","omelette","50% 50%"],
- ["cold","کوکی پروتئینی","Protein Cookie",null,"شیرینیِ بدون عذاب وجدان؛ پروتئین با طعم کوکی.","Sweetness without the guilt — protein that tastes like a cookie.","cake","50% 18%"],
- ["cold","کلاب پروتئین","Protein Club",null,"میان‌وعده‌ی پرانرژی ورزشکاران؛ سبک اما مقوی.","The athlete's power snack — light but mighty.","club-sandwich","50% 50%"],
+ ["cold","کوکی پروتئینی","Protein Cookie",null,"شیرینیِ بدون عذاب وجدان؛ پروتئین با طعم کوکی.","Sweetness without the guilt — protein that tastes like a cookie.","protein-cookie","50% 18%"],
+ ["cold","کلاب پروتئین","Protein Club",null,"میان‌وعده‌ی پرانرژی ورزشکاران؛ سبک اما مقوی.","The athlete's power snack — light but mighty.","protein-club","50% 50%"],
  ["food","برگر گوشت","Beef Burger","۴۸۰٬۰۰۰","گوشت آبدارِ گریل‌شده در نان تازه؛ برگرِ واقعی.","Juicy grilled beef in fresh bread — a real burger.","beef-burger","50% 50%"],
  ["food","برگر بوقلمون","Turkey Burger","۴۰۰٬۰۰۰","سبک‌تر اما پرطعم؛ انتخاب هوشمندِ برگردوستان.","Lighter yet full of flavour — the smart burger-lover's pick.","turkey-burger","50% 50%"],
  ["food","ساندویچ فیله","Chicken Sandwich","۴۶۰٬۰۰۰","فیله‌ی مرغِ مرینیت‌شده با سس مخصوص نوژه.","Marinated chicken fillet with Nozhe's special sauce.","chicken-sandwich","50% 50%"],
  ["food","سینی فیله","Chicken Platter","۴۰۰٬۰۰۰","فیله‌ی گریل با مخلفات؛ برای اشتهای جدی.","Grilled fillet with sides — for serious appetites.","chicken-platter","50% 50%"],
  ["food","ساندویچ مارشال (۳ تکه)","Club Sandwich","۶۸۰٬۰۰۰","سه‌تکه‌ی پر و پیمان؛ غولِ منوی ما برای شریک‌شدن.","A generous triple stack — our menu's giant, made for sharing.","club-sandwich","28% 62%"],
  ["food","سالاد سزار فیله","Caesar Salad",null,"کاهوی ترد، فیله‌ی گریل و سس سزار؛ سبک و شیک.","Crisp lettuce, grilled fillet, Caesar dressing — light and classy.","caesar-salad","50% 50%"],
- ["food","کلاب تخم‌مرغ","Club Sandwich",null,"کلاب‌ساندویچِ خانگی با تخم‌مرغ؛ ساده و سیرکننده.","A homestyle egg club sandwich — simple and satisfying.","club-sandwich","72% 28%"]
+ ["food","کلاب تخم‌مرغ","Club Sandwich",null,"کلاب‌ساندویچِ خانگی با تخم‌مرغ؛ ساده و سیرکننده.","A homestyle egg club sandwich — simple and satisfying.","club-egg","72% 28%"]
 ];
 
 /* gallery: file, fa caption, en caption, featured-tall */
@@ -598,7 +734,19 @@ var STR={
  heroMute:{fa:"بی‌صدا",en:"Mute"},
  photoAlt:{fa:"کافه نوژه",en:"Café Nozhe"},
  openItem:{fa:"مشاهده‌ی جزئیات",en:"View details"},
- openFrame:{fa:"نمایش بزرگ",en:"View larger"}
+ openFrame:{fa:"نمایش بزرگ",en:"View larger"},
+ add:{fa:"افزودن",en:"Add"},
+ added:{fa:"به سبد خرید اضافه شد ✓",en:"Added to cart ✓"},
+ cartTitle:{fa:"سبد خرید",en:"Cart"},
+ cartEmpty:{fa:"سبد خریدت خالی است.",en:"Your cart is empty."},
+ checkout:{fa:"ادامه و ثبت سفارش",en:"Continue to checkout"},
+ backToCart:{fa:"بازگشت به سبد",en:"Back to cart"},
+ backToMenu:{fa:"بازگشت به منو",en:"Back to menu"},
+ total:{fa:"جمع کل",en:"Total"},
+ orderSummary:{fa:"خلاصه‌ی سفارش",en:"Order summary"},
+ payOnline:{fa:"پرداخت آنلاین — به‌زودی",en:"Pay online — coming soon"},
+ payNote:{fa:"پرداخت آنلاین پس از خرید هاست و دامنه فعال می‌شود.",en:"Online payment will be enabled after the host and domain are purchased."},
+ orderWhats:{fa:"ثبت سفارش در واتساپ — به‌زودی",en:"Place order on WhatsApp — coming soon"}
 };
 
 /* ================= journey beats ================= */
@@ -634,10 +782,14 @@ function renderMenu(){
     MENU.forEach(function(it,mi){
       if(it[0]!==key)return;
       var nm=lang==="fa"?it[1]:it[2];
-      grid+='<button class="m-card" data-mi="'+mi+'" aria-label="'+nm+' — '+(it[3]||"—")+' — '+STR.openItem[lang]+'">'+
+      var addBtn=it[3]
+        ?'<span class="add-wrap"><button class="add-btn" data-add="'+mi+'" aria-label="'+STR.add[lang]+' — '+nm+'"><span aria-hidden="true">+</span>'+STR.add[lang]+'</button></span>'
+        :'';
+      grid+='<div class="m-card" data-mi="'+mi+'" role="button" tabindex="0" aria-label="'+nm+' — '+(it[3]||"—")+' — '+STR.openItem[lang]+'">'+
         '<span class="ph"><img loading="lazy" decoding="async" src="assets/menu/'+it[6]+'.jpg" alt="'+(lang==="fa"?it[1]:it[2])+'" style="object-position:'+it[7]+'"></span>'+
         '<span class="tx"><span class="nm">'+nm+'</span><br><span class="en">'+it[2]+'</span>'+priceHTML(it[3])+'</span>'+
-      '</button>';
+        addBtn+
+      '</div>';
     });
     p.innerHTML=desc+grid+'</div>';
     panelsEl.appendChild(p);
@@ -654,8 +806,14 @@ function staggerCards(panel){
   });
 }
 panelsEl.addEventListener("click",function(e){
+  var ab=e.target.closest("[data-add]");
+  if(ab){e.stopPropagation();addToCart(+ab.dataset.add);return;}
   var c=e.target.closest(".m-card");if(!c)return;
   openModal(+c.dataset.mi,c);
+});
+panelsEl.addEventListener("keydown",function(e){
+  var c=e.target.closest(".m-card");
+  if(c&&(e.key==="Enter"||e.key===" ")){e.preventDefault();openModal(+c.dataset.mi,c);}
 });
 
 /* menu tabs */
@@ -715,8 +873,22 @@ function fillModal(mi){
     var nv=document.createElement("span");nv.className="noval";nv.textContent="—";
     lbl.parentElement.insertBefore(nv,lbl.nextSibling);
   }
-  document.getElementById("orderCta").textContent=STR.order[lang];
   document.getElementById("modalX").setAttribute("aria-label",STR.close[lang]);
+  var ma=document.getElementById("modalActions");
+  ma.innerHTML="";
+  if(it[3]){
+    var ab=document.createElement("button");
+    ab.className="add-btn";
+    ab.innerHTML='<span aria-hidden="true">+</span><span>'+STR.add[lang]+'</span>';
+    ab.setAttribute("aria-label",STR.add[lang]+" — "+(lang==="fa"?it[1]:it[2]));
+    ab.addEventListener("click",function(){addToCart(mi);});
+    ma.appendChild(ab);
+  }else{
+    var oc=document.createElement("button");
+    oc.className="order-cta";oc.disabled=true;
+    oc.textContent=STR.order[lang];
+    ma.appendChild(oc);
+  }
 }
 function openModal(mi,fromEl){
   modalMi=mi;fillModal(mi);
@@ -757,7 +929,7 @@ document.getElementById("lbPrev").addEventListener("click",function(){lbGo(-1);}
 document.getElementById("lbNext").addEventListener("click",function(){lbGo(1);});
 lb.addEventListener("click",function(e){if(e.target===lb)closeLB();});
 document.addEventListener("keydown",function(e){
-  if(e.key==="Escape"){closeLB();closeModal();}
+  if(e.key==="Escape"){closeLB();closeModal();closeCart();}
   if(lb.classList.contains("open")){
     var fwd=html.dir==="rtl"?-1:1;
     if(e.key==="ArrowRight")lbGo(-fwd);
@@ -774,6 +946,191 @@ lb.addEventListener("touchend",function(e){
   lbGo(dx>0?-fwd:fwd);
 },{passive:true});
 
+/* ================= cart ================= */
+var CART_KEY="nozhe_cart_v1";
+var cart={};            /* MENU index -> qty */
+var cartView="items";   /* "items" | "checkout" */
+/* cart keys are MENU indexes (as strings) — photoKeys are NOT unique:
+   4 photos are shared by 2 items with different prices, so a photoKey
+   would charge the wrong price */
+function validIdx(k){
+  var i=+k;
+  return (i>=0&&i<MENU.length&&MENU[i][3])?i:-1;
+}
+function cartLoad(){
+  try{
+    var raw=localStorage.getItem(CART_KEY);if(!raw)return;
+    var obj=JSON.parse(raw);
+    Object.keys(obj).forEach(function(k){
+      var q=+obj[k];
+      if(q>0&&validIdx(k)>=0)cart[k]=q;
+    });
+  }catch(e){}
+}
+function cartSave(){try{localStorage.setItem(CART_KEY,JSON.stringify(cart));}catch(e){}}
+function cartCount(){var n=0;Object.keys(cart).forEach(function(k){n+=cart[k];});return n;}
+function priceToNum(p){
+  /* prices are stored as Persian-digit strings like "۸۰٬۰۰۰" */
+  var s=String(p).replace(/[۰-۹]/g,function(d){return "۰۱۲۳۴۵۶۷۸۹".indexOf(d);}).replace(/[^\d]/g,"");
+  return parseInt(s,10)||0;
+}
+function fmtNum(n){
+  if(lang==="fa")return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,"٬").replace(/[0-9]/g,function(d){return "۰۱۲۳۴۵۶۷۸۹"[+d];});
+  return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,",");
+}
+function cartTotal(){
+  var t=0;
+  Object.keys(cart).forEach(function(k){
+    var mi=validIdx(k);
+    if(mi>=0)t+=priceToNum(MENU[mi][3])*cart[k];
+  });
+  return t;
+}
+function itemName(it){return lang==="fa"?it[1]:it[2];}
+
+var cartBtn=document.getElementById("cartBtn"),cartCountEl=document.getElementById("cartCount"),
+    cartOv=document.getElementById("cartOv");
+function updateBadge(pop){
+  var n=cartCount();
+  cartCountEl.textContent=(lang==="fa"?faNum(n):String(n));
+  cartCountEl.classList.toggle("zero",n===0);
+  cartBtn.setAttribute("aria-label",STR.cartTitle[lang]);
+  if(pop){cartBtn.classList.remove("pop");void cartBtn.offsetWidth;cartBtn.classList.add("pop");}
+}
+
+var toastTimer=null;
+function showToast(msg){
+  document.getElementById("toastMsg").textContent=msg;
+  var t=document.getElementById("toast");
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){t.classList.remove("show");},1800);
+}
+
+function addToCart(mi){
+  var it=MENU[mi];
+  if(!it||!it[3])return;                 /* never price-less items */
+  var k=String(mi);
+  cart[k]=(cart[k]||0)+1;
+  cartSave();updateBadge(true);
+  showToast(itemName(it)+" — "+STR.added[lang]);
+  if(cartOv.classList.contains("open"))renderCart();
+}
+
+function renderCart(){
+  var body=document.getElementById("cartBody");
+  document.getElementById("cartTitle").textContent=STR.cartTitle[lang];
+  document.getElementById("cartX").setAttribute("aria-label",STR.close[lang]);
+  cartBtn.setAttribute("aria-label",STR.cartTitle[lang]);
+  body.innerHTML="";
+  var keys=Object.keys(cart).filter(function(k){return cart[k]>0&&validIdx(k)>=0;});
+  function totalRow(){
+    var t=document.createElement("div");t.className="cart-total";
+    t.innerHTML='<span class="lbl">'+STR.total[lang]+'</span>'+
+      '<span class="val">'+fmtNum(cartTotal())+' <span class="unit">'+STR.unit[lang]+'</span></span>';
+    return t;
+  }
+  if(cartView==="items"){
+    if(!keys.length){
+      var e=document.createElement("p");e.className="cart-empty";e.textContent=STR.cartEmpty[lang];
+      body.appendChild(e);
+      var b=document.createElement("button");b.className="ghost-btn";b.textContent=STR.backToMenu[lang];
+      b.addEventListener("click",closeCart);body.appendChild(b);
+      return;
+    }
+    keys.forEach(function(k){
+      var mi=validIdx(k),it=MENU[mi],unit=priceToNum(it[3]),q=cart[k];
+      var row=document.createElement("div");row.className="cart-row";
+      row.innerHTML=
+        '<img loading="lazy" src="assets/menu/'+it[6]+'.jpg" alt="'+itemName(it)+'">'+
+        '<div><div class="c-nm">'+itemName(it)+'</div>'+
+        '<div class="c-line">'+fmtNum(unit*q)+' <span class="unit">'+STR.unit[lang]+'</span></div></div>'+
+        '<div class="stepper" dir="ltr">'+
+          '<button data-dec="'+k+'" aria-label="−">−</button>'+
+          '<span class="q">'+(lang==="fa"?faNum(q):String(q))+'</span>'+
+          '<button data-inc="'+k+'" aria-label="+">+</button>'+
+        '</div>';
+      body.appendChild(row);
+    });
+    body.appendChild(totalRow());
+    var act=document.createElement("div");act.className="cart-actions";
+    var co=document.createElement("button");co.className="checkout-btn";co.textContent=STR.checkout[lang];
+    co.addEventListener("click",function(){cartView="checkout";renderCart();});
+    act.appendChild(co);body.appendChild(act);
+  }else{
+    /* ---- checkout ---- */
+    var lbl=document.createElement("p");lbl.className="cart-sec-lbl";lbl.textContent=STR.orderSummary[lang];
+    body.appendChild(lbl);
+    keys.forEach(function(k){
+      var mi2=validIdx(k),it2=MENU[mi2],q2=cart[k];
+      var r=document.createElement("div");r.className="sum-row";
+      r.innerHTML='<span><span class="s-nm">'+itemName(it2)+'</span>'+
+        ' <span class="s-det">× '+(lang==="fa"?faNum(q2):String(q2))+'</span></span>'+
+        '<span class="s-val">'+fmtNum(priceToNum(it2[3])*q2)+' '+STR.unit[lang]+'</span>';
+      body.appendChild(r);
+    });
+    body.appendChild(totalRow());
+    var act2=document.createElement("div");act2.className="cart-actions";
+    /* (a) online payment — disabled until host+domain + real gateway */
+    var pay=document.createElement("button");
+    pay.className="pay-btn";pay.disabled=true;pay.textContent=STR.payOnline[lang];
+    pay.addEventListener("click",function(){processPayment(buildOrder());});
+    act2.appendChild(pay);
+    var note=document.createElement("p");note.className="pay-note";note.textContent=STR.payNote[lang];
+    act2.appendChild(note);
+    /* (b) WhatsApp order — placeholder, no phone number exists yet */
+    var wa=document.createElement("button");
+    wa.className="pay-btn";wa.disabled=true;wa.textContent=STR.orderWhats[lang];
+    act2.appendChild(wa);
+    var back=document.createElement("button");
+    back.className="ghost-btn";back.textContent=STR.backToCart[lang];
+    back.addEventListener("click",function(){cartView="items";renderCart();});
+    act2.appendChild(back);
+    body.appendChild(act2);
+  }
+}
+document.getElementById("cartBody").addEventListener("click",function(e){
+  var inc=e.target.closest("[data-inc]"),dec=e.target.closest("[data-dec]");
+  if(inc){cart[inc.dataset.inc]++;cartSave();updateBadge();renderCart();}
+  else if(dec){var k=dec.dataset.dec;cart[k]--;if(cart[k]<=0)delete cart[k];cartSave();updateBadge();renderCart();}
+});
+
+var lastCartFocus=null;
+function openCart(){
+  cartView="items";renderCart();
+  lastCartFocus=document.activeElement;
+  cartOv.classList.add("open");document.body.style.overflow="hidden";
+  document.getElementById("cartX").focus();
+}
+function closeCart(){
+  if(!cartOv.classList.contains("open"))return;
+  cartOv.classList.remove("open");document.body.style.overflow="";
+  if(lastCartFocus&&lastCartFocus.focus)lastCartFocus.focus();
+}
+cartBtn.addEventListener("click",openCart);
+document.getElementById("cartX").addEventListener("click",closeCart);
+cartOv.addEventListener("click",function(e){if(e.target===cartOv)closeCart();});
+
+/* ============ PAYMENT_GATEWAY HOOK ============
+   TODO: plug SnapPay/ZarinPal here after the host+domain purchase.
+   The site is a static page with NO backend, NO domain and NO
+   payment gateway, so the checkout "pay" button stays disabled and
+   this stub always reports not-configured. Never fake a working
+   payment — wire the real gateway into this function first. */
+function processPayment(order){
+  return {ok:false, reason:"not-configured"};
+}
+function buildOrder(){
+  var lines=[];
+  Object.keys(cart).forEach(function(k){
+    var mi=validIdx(k);
+    if(mi<0||cart[k]<=0)return;
+    lines.push({key:k,qty:cart[k],unit:priceToNum(MENU[mi][3]),
+      name:{fa:MENU[mi][1],en:MENU[mi][2]}});
+  });
+  return {lines:lines,total:cartTotal(),currency:"IRT",lang:lang};
+}
+
 /* ================= language ================= */
 function applyLang(l){
   lang=l;localStorage.setItem("nozhe-lang",l);
@@ -782,8 +1139,9 @@ function applyLang(l){
     var v=el.getAttribute("data-"+l);
     if(v!==null)el.textContent=v;
   });
-  renderBeats();renderMenu();renderGallery();
+  renderBeats();renderMenu();renderGallery();updateBadge();
   if(modalOv.classList.contains("open")&&modalMi>=0)fillModal(modalMi);
+  if(cartOv.classList.contains("open"))renderCart();
   if(lb.classList.contains("open"))showLB();
   document.getElementById("langToggle").textContent=(l==="fa"?"EN":"فا");
   document.title=(l==="fa"?"کافه نوژه — از دانه تا فنجان":"Café Nozhe — From Bean to Cup");
@@ -852,7 +1210,9 @@ document.addEventListener("visibilitychange",function(){
 });
 
 /* ================= boot ================= */
+cartLoad();
 applyLang(lang);
+updateBadge();
 jProgress();
 })();
 </script>
