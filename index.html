@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کافه نوژه — از دانه تا فنجان</title>
+<meta name="description" content="کافه نوژه — از دانه تا فنجان، با عشق در اصفهان.">
+<style>
+:root{
+  --mint:#d7f0e1; --mint-soft:#eef9f2; --mint-deep:#8fd3ae;
+  --pine:#1e5c42; --pine-dark:#123b2a; --pine-ink:#0d2b1f;
+  --cream:#fbf7ec; --paper:#fffdf7;
+  --wood:#9a6b3f; --wood-dark:#6b4423; --wood-soft:#e8d7bd;
+  --ink:#1e2a24; --muted:#5c6f64;
+  --shadow:0 18px 50px rgba(18,59,42,.14);
+  --r:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Tahoma,"Vazirmatn","IRANSans","Segoe UI",Arial,sans-serif;
+  background:var(--cream);color:var(--ink);
+  line-height:1.9;overflow-x:hidden;
+}
+[lang="en"] body, html[lang="en"] body{line-height:1.65}
+img{max-width:100%;display:block}
+a{color:inherit}
+section{position:relative}
+.wrap{width:min(1120px,92vw);margin-inline:auto}
+
+/* ---------- header ---------- */
+header{
+  position:fixed;inset-block-start:0;inset-inline:0;z-index:50;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:rgba(251,247,236,.72);
+  border-block-end:1px solid rgba(30,92,66,.12);
+  transition:background .3s;
+}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:.65rem 0;gap:1rem}
+.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;font-weight:700;font-size:1.15rem;color:var(--pine-dark)}
+.brand svg{width:40px;height:38px;color:var(--pine)}
+.nav-links{display:flex;gap:1.4rem;list-style:none;font-size:.95rem}
+.nav-links a{text-decoration:none;color:var(--ink);opacity:.85;transition:opacity .2s,color .2s}
+.nav-links a:hover{opacity:1;color:var(--pine)}
+.lang-btn{
+  font-family:inherit;font-weight:700;cursor:pointer;
+  border:1.5px solid var(--pine);color:var(--pine);background:transparent;
+  border-radius:999px;padding:.3rem 1.1rem;font-size:.9rem;transition:.25s;
+}
+.lang-btn:hover{background:var(--pine);color:#fff}
+@media(max-width:760px){.nav-links{display:none}}
+
+/* ---------- hero ---------- */
+.hero{min-height:100svh;display:flex;align-items:flex-end;justify-content:center;color:#fff;overflow:hidden;background:var(--pine-ink)}
+.hero-media{position:absolute;inset:0}
+.hero-media video,.hero-media img{width:100%;height:100%;object-fit:cover}
+.hero-shade{position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(13,43,31,.88) 0%,rgba(13,43,31,.35) 45%,rgba(13,43,31,.15) 70%,rgba(13,43,31,.30) 100%)}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 5vw 11vh;width:min(880px,94vw)}
+.hero-logo{width:96px;height:88px;color:var(--mint);margin:0 auto 1.2rem;filter:drop-shadow(0 6px 18px rgba(0,0,0,.4))}
+.hero-tag{font-size:clamp(1.6rem,4.6vw,3rem);font-weight:800;line-height:1.7;text-shadow:0 4px 24px rgba(0,0,0,.5)}
+.hero-sub{margin-block-start:.6rem;font-size:1.05rem;opacity:.92}
+.scroll-cue{margin-block-start:2.2rem;display:inline-flex;flex-direction:column;align-items:center;gap:.4rem;font-size:.85rem;opacity:.85;text-decoration:none}
+.scroll-cue .dot{width:26px;height:44px;border:2px solid currentColor;border-radius:14px;position:relative}
+.scroll-cue .dot::after{content:"";position:absolute;top:8px;left:50%;width:4px;height:9px;margin-inline-start:-2px;border-radius:3px;background:currentColor;animation:cue 1.8s infinite}
+@keyframes cue{0%{transform:translateY(0);opacity:1}70%{transform:translateY(12px);opacity:0}100%{opacity:0}}
+.unmute{
+  position:absolute;z-index:3;inset-block-end:1.4rem;inset-inline-start:1.4rem;
+  font-family:inherit;display:flex;align-items:center;gap:.5rem;cursor:pointer;
+  background:rgba(13,43,31,.65);color:#fff;border:1px solid rgba(255,255,255,.35);
+  border-radius:999px;padding:.55rem 1.1rem;font-size:.9rem;backdrop-filter:blur(8px);
+}
+.unmute:hover{background:rgba(13,43,31,.9)}
+
+/* ---------- section basics ---------- */
+.sec{padding:clamp(4rem,9vw,7.5rem) 0}
+.kicker{display:inline-block;font-size:.85rem;font-weight:700;letter-spacing:.06em;color:var(--pine);
+  background:var(--mint);padding:.25rem 1rem;border-radius:999px;margin-block-end:1rem}
+.sec h2{font-size:clamp(1.7rem,3.6vw,2.5rem);color:var(--pine-dark);line-height:1.6;margin-block-end:1rem}
+.lead{font-size:1.08rem;color:var(--ink);max-width:62ch}
+.lead p+p{margin-block-start:1rem}
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- story ---------- */
+.story{background:var(--paper)}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+@media(max-width:820px){.story-grid{grid-template-columns:1fr}}
+.story-card{
+  background:linear-gradient(160deg,var(--mint-soft),#fff);
+  border:1px solid rgba(30,92,66,.14);border-radius:var(--r);box-shadow:var(--shadow);
+  padding:2.2rem;position:relative;overflow:hidden;
+}
+.story-card::before{content:"";position:absolute;inset-block-start:0;inset-inline:0;height:6px;
+  background:linear-gradient(to left,var(--mint-deep),var(--wood))}
+.story-mark{width:120px;height:110px;color:var(--pine);margin-block-end:1.2rem}
+
+/* ---------- journey ---------- */
+.journey{background:var(--pine-dark);color:#f2f7f3;overflow:hidden}
+.journey .kicker{background:rgba(215,240,225,.14);color:var(--mint)}
+.journey h2{color:#fff}
+.journey .lead{color:#d9e8de}
+.j-track{position:relative;margin-block-start:3rem;padding-inline-start:0}
+.j-line{position:absolute;inset-block:0;inset-inline-start:27px;width:3px;background:rgba(215,240,225,.18);border-radius:3px}
+.j-fill{position:absolute;inset-block-start:0;inset-inline-start:27px;width:3px;background:var(--mint-deep);border-radius:3px;height:0;transition:height .2s linear}
+.beat{position:relative;display:grid;grid-template-columns:56px 1fr;gap:1.4rem;padding:1.6rem 0;opacity:.35;transform:translateX(0);transition:opacity .6s}
+html[dir="rtl"] .beat{transform:translateX(0)}
+.beat.on{opacity:1}
+.beat-num{
+  width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:1.3rem;color:var(--mint);border:2px solid rgba(215,240,225,.35);
+  background:rgba(215,240,225,.06);transition:.5s;z-index:1;
+}
+.beat.on .beat-num{background:var(--mint-deep);color:var(--pine-ink);border-color:var(--mint-deep);box-shadow:0 0 26px rgba(143,211,174,.5)}
+.beat-body h3{font-size:1.25rem;color:#fff;margin-block-end:.3rem}
+.beat-body p{color:#cfe3d6;max-width:56ch}
+@media(max-width:640px){.beat{grid-template-columns:46px 1fr}.beat-num{width:46px;height:46px}.j-line,.j-fill{inset-inline-start:22px}}
+
+/* ---------- menu ---------- */
+.menu-sec{background:var(--cream)}
+.menu-tabs{display:flex;gap:.7rem;flex-wrap:wrap;margin:2rem 0 1.6rem}
+.tab{
+  font-family:inherit;font-size:1rem;font-weight:700;cursor:pointer;
+  border:1.5px solid rgba(30,92,66,.3);background:transparent;color:var(--pine-dark);
+  padding:.55rem 1.5rem;border-radius:999px;transition:.25s;
+}
+.tab:hover{border-color:var(--pine)}
+.tab.active{background:var(--pine);color:#fff;border-color:var(--pine)}
+.menu-panel{display:none;animation:fadeUp .5s ease}
+.menu-panel.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.menu-desc{color:var(--muted);margin-block-end:1.4rem;max-width:64ch}
+.menu-list{list-style:none;background:var(--paper);border-radius:var(--r);border:1px solid rgba(154,107,63,.22);box-shadow:var(--shadow);padding:.6rem 1.6rem;overflow:hidden}
+.menu-item{display:flex;align-items:baseline;gap:.8rem;padding:.85rem 0;border-block-end:1px dashed rgba(154,107,63,.35)}
+.menu-item:last-child{border-block-end:none}
+.mi-name{font-weight:700;font-size:1.05rem;white-space:nowrap}
+.mi-dots{flex:1;border-block-end:2px dotted rgba(154,107,63,.45);transform:translateY(-6px);min-width:1.2rem}
+.mi-price{font-weight:800;color:var(--pine-dark);white-space:nowrap;font-variant-numeric:tabular-nums}
+.mi-price .unit{font-weight:400;font-size:.8rem;color:var(--muted)}
+.mi-noprice{color:var(--muted);font-size:.9rem;white-space:nowrap}
+
+/* ---------- gallery ---------- */
+.gallery-sec{background:var(--paper)}
+.g-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-block-start:2.2rem}
+@media(max-width:820px){.g-grid{grid-template-columns:repeat(2,1fr);gap:.7rem}}
+.g-item{border-radius:16px;overflow:hidden;position:relative;aspect-ratio:4/3;background:var(--mint-soft);box-shadow:0 8px 24px rgba(18,59,42,.10)}
+.g-item img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+.g-item:hover img{transform:scale(1.06)}
+
+/* ---------- visit ---------- */
+.visit{background:linear-gradient(180deg,var(--mint-soft),var(--cream))}
+.visit-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-block-start:2.2rem}
+@media(max-width:820px){.visit-cards{grid-template-columns:1fr}}
+.v-card{background:var(--paper);border:1px dashed rgba(30,92,66,.4);border-radius:var(--r);padding:1.8rem;text-align:center;box-shadow:var(--shadow)}
+.v-card .ic{font-size:2rem;margin-block-end:.6rem}
+.v-card h3{color:var(--pine-dark);font-size:1.15rem;margin-block-end:.4rem}
+.v-soon{display:inline-block;margin-block-start:.5rem;background:var(--mint);color:var(--pine-dark);font-weight:700;font-size:.85rem;padding:.2rem 1rem;border-radius:999px}
+.v-note{color:var(--muted);font-size:.95rem}
+
+/* ---------- footer ---------- */
+footer{background:var(--pine-ink);color:#cfe3d6;padding:2.6rem 0;text-align:center}
+footer .f-logo{width:64px;height:59px;color:var(--mint-deep);margin:0 auto .8rem}
+footer p{font-size:.95rem}
+footer .f-en{opacity:.7;font-size:.85rem;margin-block-start:.3rem}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(13,43,31,.92);display:none;align-items:center;justify-content:center;padding:4vw}
+.lb.open{display:flex}
+.lb img{max-width:100%;max-height:88vh;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.lb button{position:absolute;inset-block-start:1.2rem;inset-inline-end:1.4rem;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;font-family:inherit}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="کافه نوژه">
+      <svg viewBox="0 0 240 220" aria-hidden="true"><use href="#nozhe-logo"/></svg>
+      <span data-fa="کافه نوژه" data-en="Café Nozhe">کافه نوژه</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#story" data-fa="داستان ما" data-en="Our Story">داستان ما</a></li>
+      <li><a href="#journey" data-fa="مسیر دانه" data-en="Bean Journey">مسیر دانه</a></li>
+      <li><a href="#menu" data-fa="منو" data-en="Menu">منو</a></li>
+      <li><a href="#gallery" data-fa="گالری" data-en="Gallery">گالری</a></li>
+      <li><a href="#visit" data-fa="تماس" data-en="Visit">تماس</a></li>
+    </ul>
+    <button class="lang-btn" id="langToggle" aria-label="تغییر زبان">EN</button>
+  </div>
+</header>
+
+<!-- shared logo symbol -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="nozhe-logo">
+      <path d="M40,96 C40,146 64,172 105,172 C146,172 170,146 170,96" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+      <ellipse cx="105" cy="96" rx="65" ry="11" fill="none" stroke="currentColor" stroke-width="9"/>
+      <path d="M168,104 C196,104 196,142 166,144" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+      <ellipse cx="105" cy="188" rx="88" ry="12" fill="none" stroke="currentColor" stroke-width="9"/>
+      <g fill="currentColor">
+        <path d="M105,24 L90,52 Q105,40 120,52 Z"/>
+        <path d="M105,46 L82,76 Q105,62 128,76 Z"/>
+        <path d="M105,68 L74,100 Q105,86 136,100 Z"/>
+        <path d="M105,90 L66,124 Q105,110 144,124 Z"/>
+        <path d="M105,112 L58,148 Q105,134 152,148 Z"/>
+        <rect x="100" y="146" width="10" height="22" rx="3"/>
+      </g>
+    </g>
+  </defs>
+</svg>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero" aria-label="هیرو">
+  <div class="hero-media">
+    <img id="heroPoster" src="assets/media/hero-poster.jpg" alt="" fetchpriority="high">
+    <video id="heroVideo" muted loop playsinline preload="none" poster="assets/media/hero-poster.jpg" aria-label="ویدیوی هیرو کافه نوژه"></video>
+  </div>
+  <div class="hero-shade"></div>
+  <button class="unmute" id="unmuteBtn" hidden>
+    <span aria-hidden="true">🔊</span>
+    <span data-fa="پخش با صدا" data-en="Play with sound">پخش با صدا</span>
+  </button>
+  <div class="hero-content">
+    <svg class="hero-logo" viewBox="0 0 240 220" aria-hidden="true"><use href="#nozhe-logo"/></svg>
+    <h1 class="hero-tag" data-fa="دانه‌ای که راه درازی آمد، تا در فنجان تو بهار شود." data-en="One bean travelled far, so spring could bloom in your cup.">دانه‌ای که راه درازی آمد، تا در فنجان تو بهار شود.</h1>
+    <p class="hero-sub" data-fa="کافه نوژه — اصفهان" data-en="Café Nozhe — Isfahan">کافه نوژه — اصفهان</p>
+    <a class="scroll-cue" href="#story">
+      <span class="dot" aria-hidden="true"></span>
+      <span data-fa="بچرخ پایین" data-en="Scroll">بچرخ پایین</span>
+    </a>
+  </div>
+</section>
+
+<!-- ============ STORY ============ -->
+<section class="sec story" id="story">
+  <div class="wrap story-grid">
+    <div class="reveal">
+      <span class="kicker" data-fa="داستان ما" data-en="Our Story">داستان ما</span>
+      <h2 data-fa="یک آیین کوچک روزانه" data-en="A small daily ritual">یک آیین کوچک روزانه</h2>
+      <div class="lead">
+        <p data-fa="نوژه از یک عشق ساده شروع شد: عشق به بوی قهوه‌ی تازه، به صدای آسیاب صبحگاهی، به لحظه‌ای که اولین قطره‌ی اسپرسو می‌چکد و روز، طعم پیدا می‌کند. ما باور داریم قهوه فقط یک نوشیدنی نیست؛ یک آیین کوچک روزانه است، مکثی میان شلوغی‌ها." data-en="Nozhe began with a simple love: the smell of fresh coffee, the morning hum of the grinder, the moment the first drop of espresso falls and the day finds its flavour. We believe coffee is not just a drink — it is a small daily ritual, a pause between the rush.">نوژه از یک عشق ساده شروع شد: عشق به بوی قهوه‌ی تازه، به صدای آسیاب صبحگاهی، به لحظه‌ای که اولین قطره‌ی اسپرسو می‌چکد و روز، طعم پیدا می‌کند. ما باور داریم قهوه فقط یک نوشیدنی نیست؛ یک آیین کوچک روزانه است، مکثی میان شلوغی‌ها.</p>
+        <p data-fa="نشان ما، کاجی است در دل یک فنجان — ریشه در خاک، سر به آسمان. مثل اصفهان، شهری که هم کهن است و هم همیشه جوان؛ ما هم می‌خواهیم همین‌جا، میان همین خیابان‌ها، فنجانی باشیم که روزت را عوض می‌کند." data-en="Our mark is a pine tree inside a cup — roots in the earth, crown to the sky. Like Isfahan itself, a city both ancient and forever young, we want to be the cup right here, on these very streets, that changes your day.">نشان ما، کاجی است در دل یک فنجان — ریشه در خاک، سر به آسمان. مثل اصفهان، شهری که هم کهن است و هم همیشه جوان؛ ما هم می‌خواهیم همین‌جا، میان همین خیابان‌ها، فنجانی باشیم که روزت را عوض می‌کند.</p>
+      </div>
+    </div>
+    <div class="story-card reveal">
+      <svg class="story-mark" viewBox="0 0 240 220" aria-hidden="true"><use href="#nozhe-logo"/></svg>
+      <h2 data-fa="کاجی در دل فنجان" data-en="A pine inside a cup">کاجی در دل فنجان</h2>
+      <p class="lead" data-fa="ریشه در خاک، سر به آسمان — مثل خود اصفهان." data-en="Roots in the earth, crown to the sky — like Isfahan itself.">ریشه در خاک، سر به آسمان — مثل خود اصفهان.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ JOURNEY ============ -->
+<section class="sec journey" id="journey">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="kicker" data-fa="مسیر دانه" data-en="The Bean's Journey">مسیر دانه</span>
+      <h2 data-fa="از دانه تا فنجان" data-en="From bean to cup">از دانه تا فنجان</h2>
+      <p class="lead" data-fa="هشت ضرب، یک سفر؛ اسکرول کن و همراه دانه بیا." data-en="Eight beats, one journey — scroll along with the bean.">هشت ضرب، یک سفر؛ اسکرول کن و همراه دانه بیا.</p>
+    </div>
+    <div class="j-track" id="jTrack">
+      <div class="j-line"></div><div class="j-fill" id="jFill"></div>
+      <!-- beats injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENU ============ -->
+<section class="sec menu-sec" id="menu">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="kicker" data-fa="منو" data-en="Menu">منو</span>
+      <h2 data-fa="فنجان‌ها و بشقاب‌ها" data-en="Cups & plates">فنجان‌ها و بشقاب‌ها</h2>
+    </div>
+    <div class="menu-tabs reveal" role="tablist" id="menuTabs">
+      <button class="tab active" role="tab" data-tab="hot" data-fa="نوشیدنی‌های گرم" data-en="Hot Drinks">نوشیدنی‌های گرم</button>
+      <button class="tab" role="tab" data-tab="cold" data-fa="سرد، دسر و صبحانه" data-en="Cold, Desserts &amp; Breakfast">سرد، دسر و صبحانه</button>
+      <button class="tab" role="tab" data-tab="food" data-fa="غذا" data-en="Food">غذا</button>
+    </div>
+    <div id="menuPanels"><!-- panels injected by JS --></div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="sec gallery-sec" id="gallery">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="kicker" data-fa="گالری" data-en="Gallery">گالری</span>
+      <h2 data-fa="دنیای نوژه" data-en="The world of Nozhe">دنیای نوژه</h2>
+      <p class="lead" data-fa="نگاهی به دنیای نوژه: بخارِ فنجان‌ها، نورِ چوب، و لحظه‌هایی که دوست داریم با شما تقسیمشان کنیم." data-en="A glimpse into the world of Nozhe: rising steam, wooden light, and moments we'd love to share with you.">نگاهی به دنیای نوژه: بخارِ فنجان‌ها، نورِ چوب، و لحظه‌هایی که دوست داریم با شما تقسیمشان کنیم.</p>
+    </div>
+    <div class="g-grid reveal" id="gGrid"><!-- photos injected by JS --></div>
+  </div>
+</section>
+
+<!-- ============ VISIT ============ -->
+<section class="sec visit" id="visit">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="kicker" data-fa="تماس و نشانی" data-en="Visit Us">تماس و نشانی</span>
+      <h2 data-fa="ما را پیدا کنید" data-en="Find Us">ما را پیدا کنید</h2>
+      <p class="lead" data-fa="کافه نوژه در اصفهان است — میان همین خیابان‌هایی که دوستشان داریم. بیایید، بنشینید، و بگذارید فنجانتان را ما انتخاب کنیم." data-en="Café Nozhe is in Isfahan — among the very streets we love. Come in, sit down, and let us choose your cup.">کافه نوژه در اصفهان است — میان همین خیابان‌هایی که دوستشان داریم. بیایید، بنشینید، و بگذارید فنجانتان را ما انتخاب کنیم.</p>
+    </div>
+    <div class="visit-cards reveal">
+      <div class="v-card">
+        <div class="ic" aria-hidden="true">📞</div>
+        <h3 data-fa="تلفن" data-en="Phone">تلفن</h3>
+        <p class="v-note" data-fa="شماره تماس کافه" data-en="The café's phone number">شماره تماس کافه</p>
+        <span class="v-soon" data-fa="به‌زودی" data-en="Coming soon">به‌زودی</span>
+      </div>
+      <div class="v-card">
+        <div class="ic" aria-hidden="true">📸</div>
+        <h3 data-fa="اینستاگرام" data-en="Instagram">اینستاگرام</h3>
+        <p class="v-note" data-fa="صفحه‌ی اینستاگرام کافه" data-en="The café's Instagram page">صفحه‌ی اینستاگرام کافه</p>
+        <span class="v-soon" data-fa="به‌زودی" data-en="Coming soon">به‌زودی</span>
+      </div>
+      <div class="v-card">
+        <div class="ic" aria-hidden="true">📍</div>
+        <h3 data-fa="نشانی" data-en="Address">نشانی</h3>
+        <p class="v-note" data-fa="آدرس دقیق کافه در اصفهان" data-en="The exact address in Isfahan">آدرس دقیق کافه در اصفهان</p>
+        <span class="v-soon" data-fa="به‌زودی" data-en="Coming soon">به‌زودی</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <svg class="f-logo" viewBox="0 0 240 220" aria-hidden="true"><use href="#nozhe-logo"/></svg>
+    <p data-fa="کافه نوژه — از دانه تا فنجان، با عشق در اصفهان." data-en="Café Nozhe — from bean to cup, with love in Isfahan.">کافه نوژه — از دانه تا فنجان، با عشق در اصفهان.</p>
+    <p class="f-en">© 2026 Café Nozhe</p>
+  </div>
+</footer>
+
+<div class="lb" id="lightbox" role="dialog" aria-label="نمایش عکس">
+  <button id="lbClose" aria-label="بستن">✕</button>
+  <img id="lbImg" src="" alt="">
+</div>
+
+<script>
+(function(){
+"use strict";
+var html=document.documentElement, lang=localStorage.getItem("nozhe-lang")||"fa";
+
+/* ---------- i18n data ---------- */
+var BEATS=[
+ {n:"۱",t:{fa:"دانه‌ها",en:"Beans"},d:{fa:"دانه‌های تازه‌برشت، هنوز بوی راه می‌دهند.",en:"Fresh-roasted beans, still carrying the scent of the road."}},
+ {n:"۲",t:{fa:"آسیاب",en:"Grinder"},d:{fa:"در آسیاب می‌شکنند تا عطرشان آزاد شود.",en:"They break in the grinder so their aroma can go free."}},
+ {n:"۳",t:{fa:"پودر قهوه",en:"Grounds"},d:{fa:"پودری به نرمیِ خاکِ باغِ بهار.",en:"Grounds as fine as spring garden soil."}},
+ {n:"۴",t:{fa:"تمپ",en:"Tamp"},d:{fa:"فشرده و دقیق، مثل یک قولِ محکم.",en:"Pressed firm and true, like a kept promise."}},
+ {n:"۵",t:{fa:"قفل پورتافیلتر",en:"Portafilter Lock"},d:{fa:"پورتافیلتر قفل می‌شود؛ صحنه آماده است.",en:"The portafilter locks in; the stage is set."}},
+ {n:"۶",t:{fa:"در دل دستگاه",en:"Inside the Machine"},d:{fa:"آب داغ و فشار، در سکوت جادو می‌کنند.",en:"Hot water and pressure work their silent magic."}},
+ {n:"۷",t:{fa:"عصاره‌گیری",en:"Extraction"},d:{fa:"طلایی می‌چکد؛ این همان لحظه‌ی طلایی است.",en:"It pours golden — this is the golden moment."}},
+ {n:"۸",t:{fa:"لاته‌آرت",en:"Latte Art"},d:{fa:"و در پایان، کاجی از جنس ابرِ شیر — امضای نوژه.",en:"And at the end, a pine tree drawn in milk cloud — the Nozhe signature."}}
+];
+var EN_NUM=["1","2","3","4","5","6","7","8"];
+var MENU={
+ hot:{desc:{fa:"از اسپرسوی تندِ صبحگاهی تا هات‌چاکلتِ آرامِ عصر؛ هر فنجان، با دانه‌ی تازه و حوصله‌ی کامل.",en:"From a bold morning espresso to a slow evening hot chocolate — every cup with fresh beans and full care."},
+  items:[
+   ["اسپرسو تک","۸۰٬۰۰۰"],["اسپرسو دبل","۱۰۰٬۰۰۰"],["آمریکانو","۱۲۰٬۰۰۰"],["کورتادو","۱۳۰٬۰۰۰"],
+   ["لاته","۲۰۰٬۰۰۰"],["موکا","۲۲۰٬۰۰۰"],["ماسالا","۱۸۰٬۰۰۰"],["قهوه ماسالا","۱۳۰٬۰۰۰"],
+   ["چای کرک","۱۸۰٬۰۰۰"],["کاپوچینو","۱۶۰٬۰۰۰"],["شیر نسکافه","۱۵۰٬۰۰۰"],["هات‌چاکلت","۲۴۰٬۰۰۰"],
+   ["وایت‌چاکلت",null],["ماچا لاته","۲۲۰٬۰۰۰"]]},
+ cold:{desc:{fa:"خنکای تابستان، شیرینیِ همراه قهوه، و صبحانه‌ای که روز را خوب شروع می‌کند.",en:"Summer coolers, sweets made for coffee, and breakfasts that start the day right."},
+  items:[
+   ["آفوگاتو","۲۲۰٬۰۰۰"],["آیس لاته","۲۴۰٬۰۰۰"],["آیس موکا","۲۶۰٬۰۰۰"],["آیس ماچا","۲۶۰٬۰۰۰"],
+   ["شیک اسپرسو",null],["شیک بادام‌زمینی",null],["شیر انبه",null],["لیموناد","۲۰۰٬۰۰۰"],
+   ["دمنوش روز",null],["کیک روز","۱۶۰٬۰۰۰"],["املت","۲۲۰٬۰۰۰"],["کوکی پروتئینی",null],["کلاب پروتئین",null]]},
+ food:{desc:{fa:"برای وقتی که قهوه تنها کافی نیست؛ برگر و ساندویچِ درست‌وحسابی، با همان وسواسِ فنجان‌هایمان.",en:"For when coffee alone isn't enough — proper burgers and sandwiches, made with the same obsession as our cups."},
+  items:[
+   ["برگر گوشت","۴۸۰٬۰۰۰"],["برگر بوقلمون","۴۰۰٬۰۰۰"],["ساندویچ فیله","۴۶۰٬۰۰۰"],["سینی فیله","۴۰۰٬۰۰۰"],
+   ["ساندویچ مارشال (۳ تکه)","۶۸۰٬۰۰۰"],["سالاد سزار فیله",null],["کلاب تخم‌مرغ",null]]}
+};
+var PHOTOS=14;
+
+/* ---------- build journey beats ---------- */
+var track=document.getElementById("jTrack");
+BEATS.forEach(function(b,i){
+  var d=document.createElement("div");d.className="beat";
+  d.innerHTML='<div class="beat-num" data-i="'+i+'">'+b.n+'</div>'+
+    '<div class="beat-body"><h3 data-fa="'+b.t.fa+'" data-en="'+b.t.en+'">'+b.t.fa+'</h3>'+
+    '<p data-fa="'+b.d.fa+'" data-en="'+b.d.en+'">'+b.d.fa+'</p></div>';
+  track.appendChild(d);
+});
+
+/* ---------- build menu panels ---------- */
+var panels=document.getElementById("menuPanels");
+Object.keys(MENU).forEach(function(key,idx){
+  var m=MENU[key],p=document.createElement("div");
+  p.className="menu-panel"+(idx===0?" active":"");p.id="panel-"+key;p.setAttribute("role","tabpanel");
+  var h='<p class="menu-desc" data-fa="'+m.desc.fa+'" data-en="'+m.desc.en+'">'+m.desc.fa+'</p><ul class="menu-list">';
+  m.items.forEach(function(it){
+    var price=it[1]
+      ?'<span class="mi-dots" aria-hidden="true"></span><span class="mi-price">'+it[1]+' <span class="unit" data-fa="تومان" data-en="">تومان</span></span>'
+      :'<span class="mi-dots" aria-hidden="true"></span><span class="mi-noprice">—</span>';
+    h+='<li class="menu-item"><span class="mi-name">'+it[0]+'</span>'+price+'</li>';
+  });
+  p.innerHTML=h+'</ul>';panels.appendChild(p);
+});
+
+/* ---------- build gallery ---------- */
+var grid=document.getElementById("gGrid");
+for(var i=1;i<=PHOTOS;i++){
+  var n=("0"+i).slice(-2),a=document.createElement("button");
+  a.className="g-item";a.style.cssText="border:none;padding:0;cursor:zoom-in;font:inherit";
+  a.setAttribute("aria-label","عکس "+i+" کافه نوژه");
+  a.innerHTML='<img loading="lazy" src="assets/media/photos/photo-'+n+'.webp" alt="کافه نوژه — عکس '+i+'">';
+  (function(src){a.addEventListener("click",function(){openLB(src);});})("assets/media/photos/photo-"+n+".webp");
+  grid.appendChild(a);
+}
+
+/* ---------- lightbox ---------- */
+var lb=document.getElementById("lightbox"),lbImg=document.getElementById("lbImg");
+function openLB(src){lbImg.src=src;lb.classList.add("open");document.body.style.overflow="hidden";}
+function closeLB(){lb.classList.remove("open");lbImg.src="";document.body.style.overflow="";}
+document.getElementById("lbClose").addEventListener("click",closeLB);
+lb.addEventListener("click",function(e){if(e.target===lb)closeLB();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeLB();});
+
+/* ---------- menu tabs ---------- */
+document.getElementById("menuTabs").addEventListener("click",function(e){
+  var t=e.target.closest(".tab");if(!t)return;
+  document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");});
+  document.querySelectorAll(".menu-panel").forEach(function(x){x.classList.remove("active");});
+  t.classList.add("active");
+  document.getElementById("panel-"+t.dataset.tab).classList.add("active");
+});
+
+/* ---------- language ---------- */
+function applyLang(l){
+  lang=l;localStorage.setItem("nozhe-lang",l);
+  html.lang=l;html.dir=(l==="fa"?"rtl":"ltr");
+  document.querySelectorAll("[data-fa]").forEach(function(el){
+    var v=el.getAttribute("data-"+l);
+    if(v!==null)el.textContent=v;
+  });
+  document.querySelectorAll(".beat-num").forEach(function(el){
+    el.textContent=(l==="fa"?BEATS[+el.dataset.i].n:EN_NUM[+el.dataset.i]);
+  });
+  document.getElementById("langToggle").textContent=(l==="fa"?"EN":"فا");
+  document.title=(l==="fa"?"کافه نوژه — از دانه تا فنجان":"Café Nozhe — From Bean to Cup");
+}
+document.getElementById("langToggle").addEventListener("click",function(){applyLang(lang==="fa"?"en":"fa");});
+applyLang(lang);
+
+/* ---------- reveal on scroll ---------- */
+var io=new IntersectionObserver(function(es){
+  es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});
+},{threshold:.12});
+document.querySelectorAll(".reveal").forEach(function(el){io.observe(el);});
+
+/* ---------- journey progress ---------- */
+var beats=[].slice.call(document.querySelectorAll(".beat")),fill=document.getElementById("jFill");
+var bio=new IntersectionObserver(function(es){
+  es.forEach(function(e){if(e.isIntersecting)e.target.classList.add("on");});
+},{threshold:.55,rootMargin:"-40% 0px -40% 0px"});
+beats.forEach(function(b){bio.observe(b);});
+function jProgress(){
+  var r=track.getBoundingClientRect(),vh=window.innerHeight;
+  var p=Math.min(1,Math.max(0,(vh*.6-r.top)/r.height));
+  fill.style.height=(p*100)+"%";
+}
+window.addEventListener("scroll",jProgress,{passive:true});jProgress();
+
+/* ---------- hero video: lazy, muted autoplay + unmute ---------- */
+var vid=document.getElementById("heroVideo"),poster=document.getElementById("heroPoster"),
+    unmute=document.getElementById("unmuteBtn"),started=false;
+function startVideo(){
+  if(started)return;started=true;
+  vid.src="assets/media/hero.mp4";
+  vid.load();
+  var pr=vid.play();if(pr&&pr.catch)pr.catch(function(){});
+  poster.style.display="none";
+  unmute.hidden=false;
+}
+if("IntersectionObserver" in window){
+  new IntersectionObserver(function(es,o){
+    if(es[0].isIntersecting){startVideo();o.disconnect();}
+  }).observe(vid);
+}else{startVideo();}
+unmute.addEventListener("click",function(){
+  vid.muted=!vid.muted;
+  unmute.querySelector("span:last-child").textContent=
+    vid.muted?(lang==="fa"?"پخش با صدا":"Play with sound"):(lang==="fa"?"بی‌صدا":"Mute");
+});
+document.addEventListener("visibilitychange",function(){
+  if(!started)return;
+  if(document.hidden)vid.pause();else{var p=vid.play();if(p&&p.catch)p.catch(function(){});}
+});
+})();
+</script>
+</body>
+</html>
