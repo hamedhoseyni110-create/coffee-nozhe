@@ -7,22 +7,33 @@
 <meta name="description" content="کافه نوژه — از دانه تا فنجان، با عشق در اصفهان.">
 <style>
 :root{
-  --mint:#d7f0e1; --mint-soft:#eef9f2; --mint-deep:#8fd3ae;
-  --pine:#1e5c42; --pine-dark:#123b2a; --pine-ink:#0d2b1f;
-  --cream:#fbf7ec; --paper:#fffdf7;
-  --wood:#9a6b3f; --wood-dark:#6b4423; --wood-soft:#e8d7bd;
-  --ink:#1e2a24; --muted:#5c6f64;
-  --shadow:0 18px 50px rgba(18,59,42,.14);
+  --leaf-bg:#DCEFE2;
+  --leaf-bg-2:#EAF6ED;
+  --pine-dark:#123B2A;
+  --pine-ink:#0B271D;
+  --ink:#14291F;
+  --muted:#4E665A;
+  --pine:#14523A;
+  --mint-pill:#BFE6CC;
+  --wood:#9A6B3F;
+  --coal:#101511;
+  --card:#F2FAF4;
+  --line:rgba(20,82,58,.16);
+  --paper-light:#EAF5ED;
+  --shadow:0 18px 50px rgba(11,39,29,.16);
+  --ease-out:cubic-bezier(.22,.61,.36,1);
+  --ease-spring:cubic-bezier(.22,.9,.28,1.05);
+  --t-fast:.25s; --t-med:.45s; --t-slow:.8s;
   --r:22px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
   font-family:Tahoma,"Vazirmatn","IRANSans","Segoe UI",Arial,sans-serif;
-  background:var(--cream);color:var(--ink);
+  background:var(--leaf-bg);color:var(--ink);
   line-height:1.9;overflow-x:hidden;
 }
-[lang="en"] body, html[lang="en"] body{line-height:1.65}
+html[lang="en"] body{line-height:1.65}
 img{max-width:100%;display:block}
 a{color:inherit}
 section{position:relative}
@@ -32,8 +43,8 @@ section{position:relative}
 header{
   position:fixed;inset-block-start:0;inset-inline:0;z-index:50;
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  background:rgba(251,247,236,.72);
-  border-block-end:1px solid rgba(30,92,66,.12);
+  background:rgba(220,239,226,.78);
+  border-block-end:1px solid var(--line);
   transition:background .3s;
 }
 .nav{display:flex;align-items:center;justify-content:space-between;padding:.65rem 0;gap:1rem}
@@ -55,9 +66,9 @@ header{
 .hero-media{position:absolute;inset:0}
 .hero-media video,.hero-media img{width:100%;height:100%;object-fit:cover}
 .hero-shade{position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(13,43,31,.88) 0%,rgba(13,43,31,.35) 45%,rgba(13,43,31,.15) 70%,rgba(13,43,31,.30) 100%)}
+  background:linear-gradient(to top,rgba(11,39,29,.92) 0%,rgba(11,39,29,.55) 40%,rgba(11,39,29,.25) 100%)}
 .hero-content{position:relative;z-index:2;text-align:center;padding:0 5vw 11vh;width:min(880px,94vw)}
-.hero-logo{width:96px;height:88px;color:var(--mint);margin:0 auto 1.2rem;filter:drop-shadow(0 6px 18px rgba(0,0,0,.4))}
+.hero-logo{width:96px;height:88px;color:#fff;margin:0 auto 1.2rem;filter:drop-shadow(0 6px 18px rgba(0,0,0,.4))}
 .hero-tag{font-size:clamp(1.6rem,4.6vw,3rem);font-weight:800;line-height:1.7;text-shadow:0 4px 24px rgba(0,0,0,.5)}
 .hero-sub{margin-block-start:.6rem;font-size:1.05rem;opacity:.92}
 .scroll-cue{margin-block-start:2.2rem;display:inline-flex;flex-direction:column;align-items:center;gap:.4rem;font-size:.85rem;opacity:.85;text-decoration:none}
@@ -67,108 +78,220 @@ header{
 .unmute{
   position:absolute;z-index:3;inset-block-end:1.4rem;inset-inline-start:1.4rem;
   font-family:inherit;display:flex;align-items:center;gap:.5rem;cursor:pointer;
-  background:rgba(13,43,31,.65);color:#fff;border:1px solid rgba(255,255,255,.35);
+  background:rgba(11,39,29,.65);color:#fff;border:1px solid rgba(255,255,255,.35);
   border-radius:999px;padding:.55rem 1.1rem;font-size:.9rem;backdrop-filter:blur(8px);
 }
-.unmute:hover{background:rgba(13,43,31,.9)}
+.unmute:hover{background:rgba(11,39,29,.9)}
 
 /* ---------- section basics ---------- */
 .sec{padding:clamp(4rem,9vw,7.5rem) 0}
-.kicker{display:inline-block;font-size:.85rem;font-weight:700;letter-spacing:.06em;color:var(--pine);
-  background:var(--mint);padding:.25rem 1rem;border-radius:999px;margin-block-end:1rem}
-.sec h2{font-size:clamp(1.7rem,3.6vw,2.5rem);color:var(--pine-dark);line-height:1.6;margin-block-end:1rem}
+.kicker{display:inline-block;font-size:.85rem;font-weight:700;letter-spacing:.06em;color:var(--pine-dark);
+  background:var(--mint-pill);padding:.25rem 1rem;border-radius:999px;margin-block-end:1rem}
+.sec h2{font-size:clamp(1.7rem,3.6vw,2.5rem);color:var(--pine);line-height:1.6;margin-block-end:1rem}
 .lead{font-size:1.08rem;color:var(--ink);max-width:62ch}
 .lead p+p{margin-block-start:1rem}
-.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s ease}
+.reveal{opacity:0;transform:translateY(34px);transition:opacity var(--t-slow) var(--ease-out),transform var(--t-slow) var(--ease-out)}
 .reveal.in{opacity:1;transform:none}
 
 /* ---------- story ---------- */
-.story{background:var(--paper)}
+.story{background:var(--leaf-bg-2)}
 .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
 @media(max-width:820px){.story-grid{grid-template-columns:1fr}}
 .story-card{
-  background:linear-gradient(160deg,var(--mint-soft),#fff);
-  border:1px solid rgba(30,92,66,.14);border-radius:var(--r);box-shadow:var(--shadow);
+  background:var(--card);
+  border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);
   padding:2.2rem;position:relative;overflow:hidden;
 }
 .story-card::before{content:"";position:absolute;inset-block-start:0;inset-inline:0;height:6px;
-  background:linear-gradient(to left,var(--mint-deep),var(--wood))}
+  background:linear-gradient(to left,var(--pine),var(--wood))}
 .story-mark{width:120px;height:110px;color:var(--pine);margin-block-end:1.2rem}
 
+/* ---------- Ken Burns band ---------- */
+.kb-band{position:relative;height:clamp(320px,45vh,520px);overflow:hidden;background:var(--pine-ink)}
+.kb-frame{position:absolute;inset:-60px 0}
+.kb-frame img{width:100%;height:100%;object-fit:cover;animation:kb-zoom 22s ease-in-out infinite alternate}
+@keyframes kb-zoom{from{transform:scale(1)}to{transform:scale(1.12)}}
+.kb-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(11,39,29,.78) 0%,rgba(11,39,29,.15) 55%,rgba(11,39,29,.35) 100%)}
+.kb-cap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 6vw}
+.kb-cap p{color:#fff;font-size:clamp(1.15rem,2.8vw,1.7rem);font-weight:700;line-height:2;text-shadow:0 4px 26px rgba(0,0,0,.6);max-width:44ch}
+.kb-cap .en-line{display:block;font-size:.62em;font-weight:400;opacity:.85}
+@media(max-width:760px){.kb-band{height:300px}.kb-frame{inset:0}}
+
 /* ---------- journey ---------- */
-.journey{background:var(--pine-dark);color:#f2f7f3;overflow:hidden}
-.journey .kicker{background:rgba(215,240,225,.14);color:var(--mint)}
+.journey{background:var(--pine-dark);color:var(--paper-light);overflow:hidden}
+.journey .kicker{background:rgba(191,230,204,.16);color:#fff}
 .journey h2{color:#fff}
-.journey .lead{color:#d9e8de}
+.journey .lead{color:#d3e7d9}
 .j-track{position:relative;margin-block-start:3rem;padding-inline-start:0}
-.j-line{position:absolute;inset-block:0;inset-inline-start:27px;width:3px;background:rgba(215,240,225,.18);border-radius:3px}
-.j-fill{position:absolute;inset-block-start:0;inset-inline-start:27px;width:3px;background:var(--mint-deep);border-radius:3px;height:0;transition:height .2s linear}
-.beat{position:relative;display:grid;grid-template-columns:56px 1fr;gap:1.4rem;padding:1.6rem 0;opacity:.35;transform:translateX(0);transition:opacity .6s}
-html[dir="rtl"] .beat{transform:translateX(0)}
+.j-line{position:absolute;inset-block:0;inset-inline-start:27px;width:3px;background:rgba(191,230,204,.18);border-radius:3px}
+.j-fill{position:absolute;inset-block-start:0;inset-inline-start:27px;width:3px;background:var(--mint-pill);border-radius:3px;height:0;transition:height .2s linear}
+.beat{position:relative;display:grid;grid-template-columns:56px 1fr;gap:1.4rem;padding:1.6rem 0;opacity:.35;transition:opacity .6s}
 .beat.on{opacity:1}
 .beat-num{
   width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-weight:800;font-size:1.3rem;color:var(--mint);border:2px solid rgba(215,240,225,.35);
-  background:rgba(215,240,225,.06);transition:.5s;z-index:1;
+  font-weight:800;font-size:1.3rem;color:var(--mint-pill);border:2px solid rgba(191,230,204,.35);
+  background:rgba(191,230,204,.06);transition:.5s;z-index:1;
 }
-.beat.on .beat-num{background:var(--mint-deep);color:var(--pine-ink);border-color:var(--mint-deep);box-shadow:0 0 26px rgba(143,211,174,.5)}
+.beat.on .beat-num{background:var(--mint-pill);color:var(--pine-ink);border-color:var(--mint-pill);box-shadow:0 0 26px rgba(191,230,204,.5)}
 .beat-body h3{font-size:1.25rem;color:#fff;margin-block-end:.3rem}
 .beat-body p{color:#cfe3d6;max-width:56ch}
 @media(max-width:640px){.beat{grid-template-columns:46px 1fr}.beat-num{width:46px;height:46px}.j-line,.j-fill{inset-inline-start:22px}}
 
-/* ---------- menu ---------- */
-.menu-sec{background:var(--cream)}
+/* ---------- photo menu ---------- */
+.menu-sec{background:var(--leaf-bg)}
 .menu-tabs{display:flex;gap:.7rem;flex-wrap:wrap;margin:2rem 0 1.6rem}
 .tab{
   font-family:inherit;font-size:1rem;font-weight:700;cursor:pointer;
-  border:1.5px solid rgba(30,92,66,.3);background:transparent;color:var(--pine-dark);
-  padding:.55rem 1.5rem;border-radius:999px;transition:.25s;
+  border:1.5px solid var(--line);background:transparent;color:var(--pine-dark);
+  padding:.55rem 1.5rem;border-radius:999px;transition:border-color var(--t-fast),transform var(--t-fast),background var(--t-fast),color var(--t-fast),box-shadow var(--t-fast);
 }
-.tab:hover{border-color:var(--pine)}
-.tab.active{background:var(--pine);color:#fff;border-color:var(--pine)}
-.menu-panel{display:none;animation:fadeUp .5s ease}
-.menu-panel.active{display:block}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.menu-desc{color:var(--muted);margin-block-end:1.4rem;max-width:64ch}
-.menu-list{list-style:none;background:var(--paper);border-radius:var(--r);border:1px solid rgba(154,107,63,.22);box-shadow:var(--shadow);padding:.6rem 1.6rem;overflow:hidden}
-.menu-item{display:flex;align-items:baseline;gap:.8rem;padding:.85rem 0;border-block-end:1px dashed rgba(154,107,63,.35)}
-.menu-item:last-child{border-block-end:none}
-.mi-name{font-weight:700;font-size:1.05rem;white-space:nowrap}
-.mi-dots{flex:1;border-block-end:2px dotted rgba(154,107,63,.45);transform:translateY(-6px);min-width:1.2rem}
-.mi-price{font-weight:800;color:var(--pine-dark);white-space:nowrap;font-variant-numeric:tabular-nums}
-.mi-price .unit{font-weight:400;font-size:.8rem;color:var(--muted)}
-.mi-noprice{color:var(--muted);font-size:.9rem;white-space:nowrap}
+.tab:hover{border-color:var(--pine);transform:translateY(-2px)}
+.tab.active{background:var(--pine);color:#fff;border-color:var(--pine);box-shadow:0 10px 26px rgba(20,82,58,.28)}
+.menu-panel{display:none}
+.menu-panel.active{display:block;animation:panelIn .45s var(--ease-out)}
+@keyframes panelIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.menu-desc{color:var(--muted);margin-block-end:1.6rem;max-width:64ch}
+.m-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+@media(max-width:980px){.m-grid{grid-template-columns:repeat(2,1fr)}}
+.m-card{
+  font-family:inherit;text-align:start;cursor:pointer;
+  background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;
+  box-shadow:0 8px 24px rgba(11,39,29,.08);padding:0;
+  transition:transform .35s var(--ease-out),box-shadow .35s var(--ease-out);
+  position:relative;color:var(--ink);
+  animation:cardIn .45s var(--ease-out) backwards;
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.m-card::after{content:"";position:absolute;inset-inline:0;inset-block-end:0;height:3px;background:var(--wood);opacity:0;transition:opacity .35s}
+.m-card .ph{aspect-ratio:4/5;overflow:hidden;border-radius:20px 20px 0 0;background:#dfeee4}
+.m-card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease-out)}
+.m-card .tx{padding:.9rem 1rem 1.1rem}
+.m-card .nm{font-weight:700;font-size:1.05rem;color:var(--pine-dark);line-height:1.6}
+.m-card .en{font-size:.8rem;color:var(--muted);line-height:1.5}
+.m-card .pr{margin-block-start:.35rem;font-weight:800;font-size:1.1rem;color:var(--pine)}
+.m-card .pr .unit{font-weight:400;font-size:.78rem;color:var(--muted)}
+.m-card .nopr{margin-block-start:.35rem;color:var(--muted);font-size:1rem}
+@media(hover:hover){
+  .m-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+  .m-card:hover::after{opacity:1}
+  .m-card:hover .ph img{transform:scale(1.06)}
+}
+@media(max-width:760px){
+  .menu-tabs{flex-wrap:nowrap;overflow-x:auto;scroll-snap-type:x proximity;padding-block-end:.4rem;scrollbar-width:none}
+  .menu-tabs::-webkit-scrollbar{display:none}
+  .tab{white-space:nowrap;scroll-snap-align:start;flex:0 0 auto}
+  .m-grid{grid-template-columns:repeat(2,1fr);gap:.7rem}
+  .m-card .tx{padding:.65rem .7rem .8rem}
+  .m-card .nm{font-size:.95rem}
+  .m-card .en{font-size:.7rem}
+  .m-card .pr{font-size:.95rem}
+  .m-card:active{transform:scale(.97);transition:transform .15s}
+}
 
-/* ---------- gallery ---------- */
-.gallery-sec{background:var(--paper)}
-.g-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-block-start:2.2rem}
-@media(max-width:820px){.g-grid{grid-template-columns:repeat(2,1fr);gap:.7rem}}
-.g-item{border-radius:16px;overflow:hidden;position:relative;aspect-ratio:4/3;background:var(--mint-soft);box-shadow:0 8px 24px rgba(18,59,42,.10)}
-.g-item img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
-.g-item:hover img{transform:scale(1.06)}
+/* ---------- detail modal ---------- */
+.modal-ov{position:fixed;inset:0;z-index:120;background:rgba(11,39,29,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  display:none;align-items:center;justify-content:center;padding:4vw;animation:ovIn .3s var(--ease-out)}
+.modal-ov.open{display:flex}
+@keyframes ovIn{from{opacity:0}to{opacity:1}}
+.modal{background:var(--card);border-radius:24px;max-width:880px;width:100%;max-height:90vh;overflow:hidden;
+  display:grid;grid-template-columns:1fr 1.1fr;box-shadow:0 40px 100px rgba(0,0,0,.5);
+  animation:modalIn .38s var(--ease-spring);position:relative}
+@keyframes modalIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.modal.closing{animation:modalOut .25s var(--ease-out)}
+@keyframes modalOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(14px)}}
+.modal .mphoto{aspect-ratio:4/5;overflow:hidden;background:#dfeee4}
+.modal .mphoto img{width:100%;height:100%;object-fit:cover}
+.modal .mbody{padding:2rem 2.2rem;display:flex;flex-direction:column;gap:.7rem;overflow-y:auto}
+.modal .mbody h3{font-size:1.6rem;color:var(--pine-dark);line-height:1.6}
+.modal .mbody .men{font-size:.95rem;color:var(--muted)}
+.modal .mdesc{color:var(--ink);line-height:2}
+.modal .mprice{display:flex;align-items:baseline;gap:.6rem;margin-block-start:.4rem;border-block-start:1px dashed var(--line);padding-block-start:1rem}
+.modal .mprice .lbl{font-size:.85rem;color:var(--muted);font-weight:700}
+.modal .mprice .val{font-size:1.5rem;font-weight:800;color:var(--pine)}
+.modal .mprice .unit{font-size:.85rem;color:var(--muted)}
+.modal .mprice .noval{font-size:1.2rem;color:var(--muted)}
+.order-cta{
+  margin-block-start:.6rem;font-family:inherit;font-size:1rem;font-weight:700;
+  background:rgba(78,102,90,.14);color:var(--muted);border:1px dashed rgba(78,102,90,.5);
+  border-radius:999px;padding:.8rem 1.5rem;cursor:not-allowed;width:100%;
+}
+.modal-x{
+  position:absolute;inset-block-start:1rem;inset-inline-end:1rem;z-index:2;
+  width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;
+  background:rgba(11,39,29,.55);color:#fff;font-size:1.2rem;font-family:inherit;backdrop-filter:blur(6px);
+}
+.modal-x:hover{background:rgba(11,39,29,.85)}
+@media(max-width:760px){
+  .modal-ov{padding:0;align-items:flex-end}
+  .modal{grid-template-columns:1fr;max-width:100%;max-height:92vh;border-radius:24px 24px 0 0;
+    animation:sheetIn .4s var(--ease-spring);display:block;overflow-y:auto}
+  @keyframes sheetIn{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:none}}
+  .modal .mphoto{aspect-ratio:16/10}
+  .modal .mbody{padding:1.5rem 1.4rem 2.2rem}
+  .modal-x{width:44px;height:44px;font-size:1.4rem}
+}
+
+/* ---------- gallery film-strip ---------- */
+.gallery-sec{background:var(--pine-dark);color:var(--paper-light);overflow:hidden}
+.gallery-sec .kicker{background:rgba(191,230,204,.16);color:#fff}
+.gallery-sec h2{color:#fff}
+.gallery-sec .lead{color:#d3e7d9}
+.film-wrap{position:relative;margin-block-start:2.4rem}
+.film{display:flex;gap:1.2rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
+  padding:0 4vw 1rem;scroll-behavior:smooth;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent)}
+.film::-webkit-scrollbar{display:none}
+.frame{position:relative;flex:0 0 auto;width:clamp(240px,32vw,380px);aspect-ratio:3/4;border-radius:18px;overflow:hidden;
+  scroll-snap-align:center;cursor:zoom-in;border:1px solid rgba(191,230,204,.22);background:#0f3325;padding:0;font-family:inherit}
+.frame.tall{aspect-ratio:3/4.6}
+.frame img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease-out)}
+.frame:hover img{transform:scale(1.05)}
+.frame .fnum{position:absolute;inset-block-start:.7rem;inset-inline-start:.8rem;color:#fff;font-family:monospace;font-size:.8rem;opacity:.9;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.frame .fcap{position:absolute;inset-inline:0;inset-block-end:0;padding:2.2rem .9rem .8rem;color:#fff;font-size:.95rem;font-weight:700;
+  background:linear-gradient(to top,rgba(11,39,29,.85),transparent);text-align:start}
+.film-arrow{position:absolute;inset-block-start:50%;transform:translateY(-50%);z-index:2;width:46px;height:46px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.35);background:rgba(11,39,29,.55);color:#fff;font-size:1.3rem;cursor:pointer;backdrop-filter:blur(6px);transition:.25s}
+.film-arrow:hover{background:rgba(11,39,29,.9)}
+.film-arrow.prev{inset-inline-start:1.2rem}
+.film-arrow.next{inset-inline-end:1.2rem}
+@media(max-width:760px){.frame{width:68vw}.film-arrow{display:none}}
+
+/* ---------- lightbox ---------- */
+.lb{position:fixed;inset:0;z-index:130;background:var(--pine-ink);display:none;align-items:center;justify-content:center}
+.lb.open{display:flex}
+.lb figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:1rem;max-width:92vw}
+.lb img{max-width:92vw;max-height:78vh;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.lb figcaption{color:#fff;font-size:1rem}
+.lb .count{color:rgba(255,255,255,.75);font-size:.9rem}
+.lb .lb-x{position:absolute;inset-block-start:1.2rem;inset-inline-end:1.4rem;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;font-family:inherit;min-width:44px;min-height:44px}
+.lb .lb-nav{position:absolute;inset-block-start:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.08);color:#fff;font-size:1.5rem;cursor:pointer;font-family:inherit}
+.lb .lb-prev{inset-inline-start:1.2rem}
+.lb .lb-next{inset-inline-end:1.2rem}
+@media(max-width:760px){.lb .lb-nav{width:56px;height:56px}}
 
 /* ---------- visit ---------- */
-.visit{background:linear-gradient(180deg,var(--mint-soft),var(--cream))}
+.visit{background:var(--leaf-bg-2)}
 .visit-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-block-start:2.2rem}
 @media(max-width:820px){.visit-cards{grid-template-columns:1fr}}
-.v-card{background:var(--paper);border:1px dashed rgba(30,92,66,.4);border-radius:var(--r);padding:1.8rem;text-align:center;box-shadow:var(--shadow)}
+.v-card{background:var(--card);border:1px dashed rgba(20,82,58,.4);border-radius:var(--r);padding:1.8rem;text-align:center;box-shadow:var(--shadow)}
 .v-card .ic{font-size:2rem;margin-block-end:.6rem}
 .v-card h3{color:var(--pine-dark);font-size:1.15rem;margin-block-end:.4rem}
-.v-soon{display:inline-block;margin-block-start:.5rem;background:var(--mint);color:var(--pine-dark);font-weight:700;font-size:.85rem;padding:.2rem 1rem;border-radius:999px}
+.v-soon{display:inline-block;margin-block-start:.5rem;background:var(--mint-pill);color:var(--pine-dark);font-weight:700;font-size:.85rem;padding:.2rem 1rem;border-radius:999px}
 .v-note{color:var(--muted);font-size:.95rem}
 
 /* ---------- footer ---------- */
 footer{background:var(--pine-ink);color:#cfe3d6;padding:2.6rem 0;text-align:center}
-footer .f-logo{width:64px;height:59px;color:var(--mint-deep);margin:0 auto .8rem}
+footer .f-logo{width:64px;height:59px;color:var(--mint-pill);margin:0 auto .8rem}
 footer p{font-size:.95rem}
 footer .f-en{opacity:.7;font-size:.85rem;margin-block-start:.3rem}
 
-/* lightbox */
-.lb{position:fixed;inset:0;z-index:100;background:rgba(13,43,31,.92);display:none;align-items:center;justify-content:center;padding:4vw}
-.lb.open{display:flex}
-.lb img{max-width:100%;max-height:88vh;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
-.lb button{position:absolute;inset-block-start:1.2rem;inset-inline-end:1.4rem;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;font-family:inherit}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  .kb-frame img{animation:none}
+}
 </style>
 </head>
 <body>
@@ -253,6 +376,17 @@ footer .f-en{opacity:.7;font-size:.85rem;margin-block-start:.3rem}
   </div>
 </section>
 
+<!-- ============ KEN BURNS SCROLL BAND ============ -->
+<section class="kb-band" id="kbBand" aria-label="لحظه‌ی اسکرول">
+  <div class="kb-frame" id="kbFrame">
+    <img src="assets/media/kenburns-band.webp" alt="" loading="lazy" decoding="async">
+  </div>
+  <div class="kb-shade"></div>
+  <div class="kb-cap reveal">
+    <p data-fa="نور که از پنجره می‌ریزد، قهوه طعم دیگری می‌گیرد — اینجا، هر صبح یک شروع تازه است." data-en="When light pours through the window, coffee tastes different — here, every morning is a fresh start.">نور که از پنجره می‌ریزد، قهوه طعم دیگری می‌گیرد — اینجا، هر صبح یک شروع تازه است.</p>
+  </div>
+</section>
+
 <!-- ============ JOURNEY ============ -->
 <section class="sec journey" id="journey">
   <div class="wrap">
@@ -263,36 +397,40 @@ footer .f-en{opacity:.7;font-size:.85rem;margin-block-start:.3rem}
     </div>
     <div class="j-track" id="jTrack">
       <div class="j-line"></div><div class="j-fill" id="jFill"></div>
-      <!-- beats injected by JS -->
     </div>
   </div>
 </section>
 
-<!-- ============ MENU ============ -->
+<!-- ============ PHOTO MENU ============ -->
 <section class="sec menu-sec" id="menu">
   <div class="wrap">
     <div class="reveal">
       <span class="kicker" data-fa="منو" data-en="Menu">منو</span>
-      <h2 data-fa="فنجان‌ها و بشقاب‌ها" data-en="Cups & plates">فنجان‌ها و بشقاب‌ها</h2>
+      <h2 data-fa="از لنزِ نوژه — بشقابِ واقعیِ ما" data-en="Through Nozhe's Lens — Our Real Plate">از لنزِ نوژه — بشقابِ واقعیِ ما</h2>
+      <p class="lead" data-fa="هر عکس، همان چیزی است که سر میزت می‌آید؛ روی هر کدام بزن تا جزئیاتش را ببینی." data-en="Every photo is exactly what lands on your table — tap any of them to see the details.">هر عکس، همان چیزی است که سر میزت می‌آید؛ روی هر کدام بزن تا جزئیاتش را ببینی.</p>
     </div>
-    <div class="menu-tabs reveal" role="tablist" id="menuTabs">
-      <button class="tab active" role="tab" data-tab="hot" data-fa="نوشیدنی‌های گرم" data-en="Hot Drinks">نوشیدنی‌های گرم</button>
-      <button class="tab" role="tab" data-tab="cold" data-fa="سرد، دسر و صبحانه" data-en="Cold, Desserts &amp; Breakfast">سرد، دسر و صبحانه</button>
-      <button class="tab" role="tab" data-tab="food" data-fa="غذا" data-en="Food">غذا</button>
+    <div class="menu-tabs reveal" role="tablist" id="menuTabs" aria-label="گروه‌های منو">
+      <button class="tab active" role="tab" aria-selected="true" data-tab="hot" data-fa="نوشیدنی‌های گرم" data-en="Hot Drinks">نوشیدنی‌های گرم</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="cold" data-fa="سرد، دسر و صبحانه" data-en="Cold, Desserts &amp; Breakfast">سرد، دسر و صبحانه</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="food" data-fa="غذا" data-en="Food">غذا</button>
     </div>
-    <div id="menuPanels"><!-- panels injected by JS --></div>
+    <div id="menuPanels"></div>
   </div>
 </section>
 
-<!-- ============ GALLERY ============ -->
+<!-- ============ GALLERY FILM-STRIP ============ -->
 <section class="sec gallery-sec" id="gallery">
   <div class="wrap">
     <div class="reveal">
       <span class="kicker" data-fa="گالری" data-en="Gallery">گالری</span>
-      <h2 data-fa="دنیای نوژه" data-en="The world of Nozhe">دنیای نوژه</h2>
-      <p class="lead" data-fa="نگاهی به دنیای نوژه: بخارِ فنجان‌ها، نورِ چوب، و لحظه‌هایی که دوست داریم با شما تقسیمشان کنیم." data-en="A glimpse into the world of Nozhe: rising steam, wooden light, and moments we'd love to share with you.">نگاهی به دنیای نوژه: بخارِ فنجان‌ها، نورِ چوب، و لحظه‌هایی که دوست داریم با شما تقسیمشان کنیم.</p>
+      <h2 data-fa="قاب‌هایی از حال‌وهوای نوژه" data-en="Frames from the Nozhe Mood">قاب‌هایی از حال‌وهوای نوژه</h2>
+      <p class="lead" data-fa="نورِ چوب، بخارِ فنجان، و لحظه‌هایی که دوربین ما دزدید — ورق بزن و حسش کن." data-en="Wooden light, rising steam, and moments our camera stole — scroll through and feel them.">نورِ چوب، بخارِ فنجان، و لحظه‌هایی که دوربین ما دزدید — ورق بزن و حسش کن.</p>
     </div>
-    <div class="g-grid reveal" id="gGrid"><!-- photos injected by JS --></div>
+  </div>
+  <div class="film-wrap reveal">
+    <div class="film" id="filmStrip"></div>
+    <button class="film-arrow prev" id="filmPrev" aria-label="قبلی">‹</button>
+    <button class="film-arrow next" id="filmNext" aria-label="بعدی">›</button>
   </div>
 </section>
 
@@ -337,9 +475,35 @@ footer .f-en{opacity:.7;font-size:.85rem;margin-block-start:.3rem}
   </div>
 </footer>
 
-<div class="lb" id="lightbox" role="dialog" aria-label="نمایش عکس">
-  <button id="lbClose" aria-label="بستن">✕</button>
-  <img id="lbImg" src="" alt="">
+<!-- item detail modal -->
+<div class="modal-ov" id="modalOv">
+  <div class="modal" id="modalPanel" role="dialog" aria-modal="true" aria-labelledby="modalName">
+    <button class="modal-x" id="modalX" aria-label="بستن">✕</button>
+    <div class="mphoto"><img id="modalPhoto" src="" alt=""></div>
+    <div class="mbody">
+      <h3 id="modalName"></h3>
+      <p class="men" id="modalEn"></p>
+      <p class="mdesc" id="modalDesc"></p>
+      <div class="mprice">
+        <span class="lbl" id="modalPriceLbl"></span>
+        <span class="val" id="modalPriceVal"></span>
+        <span class="unit" id="modalPriceUnit"></span>
+      </div>
+      <button class="order-cta" id="orderCta" disabled></button>
+    </div>
+  </div>
+</div>
+
+<!-- gallery lightbox -->
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="نمایش عکس">
+  <button class="lb-x" id="lbClose" aria-label="بستن">✕</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="عکس قبلی">‹</button>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="عکس بعدی">›</button>
+  <figure>
+    <img id="lbImg" src="" alt="">
+    <figcaption id="lbCap"></figcaption>
+    <span class="count" id="lbCount"></span>
+  </figure>
 </div>
 
 <script>
@@ -347,7 +511,7 @@ footer .f-en{opacity:.7;font-size:.85rem;margin-block-start:.3rem}
 "use strict";
 var html=document.documentElement, lang=localStorage.getItem("nozhe-lang")||"fa";
 
-/* ---------- i18n data ---------- */
+/* ================= data ================= */
 var BEATS=[
  {n:"۱",t:{fa:"دانه‌ها",en:"Beans"},d:{fa:"دانه‌های تازه‌برشت، هنوز بوی راه می‌دهند.",en:"Fresh-roasted beans, still carrying the scent of the road."}},
  {n:"۲",t:{fa:"آسیاب",en:"Grinder"},d:{fa:"در آسیاب می‌شکنند تا عطرشان آزاد شود.",en:"They break in the grinder so their aroma can go free."}},
@@ -359,79 +523,258 @@ var BEATS=[
  {n:"۸",t:{fa:"لاته‌آرت",en:"Latte Art"},d:{fa:"و در پایان، کاجی از جنس ابرِ شیر — امضای نوژه.",en:"And at the end, a pine tree drawn in milk cloud — the Nozhe signature."}}
 ];
 var EN_NUM=["1","2","3","4","5","6","7","8"];
-var MENU={
- hot:{desc:{fa:"از اسپرسوی تندِ صبحگاهی تا هات‌چاکلتِ آرامِ عصر؛ هر فنجان، با دانه‌ی تازه و حوصله‌ی کامل.",en:"From a bold morning espresso to a slow evening hot chocolate — every cup with fresh beans and full care."},
-  items:[
-   ["اسپرسو تک","۸۰٬۰۰۰"],["اسپرسو دبل","۱۰۰٬۰۰۰"],["آمریکانو","۱۲۰٬۰۰۰"],["کورتادو","۱۳۰٬۰۰۰"],
-   ["لاته","۲۰۰٬۰۰۰"],["موکا","۲۲۰٬۰۰۰"],["ماسالا","۱۸۰٬۰۰۰"],["قهوه ماسالا","۱۳۰٬۰۰۰"],
-   ["چای کرک","۱۸۰٬۰۰۰"],["کاپوچینو","۱۶۰٬۰۰۰"],["شیر نسکافه","۱۵۰٬۰۰۰"],["هات‌چاکلت","۲۴۰٬۰۰۰"],
-   ["وایت‌چاکلت",null],["ماچا لاته","۲۲۰٬۰۰۰"]]},
- cold:{desc:{fa:"خنکای تابستان، شیرینیِ همراه قهوه، و صبحانه‌ای که روز را خوب شروع می‌کند.",en:"Summer coolers, sweets made for coffee, and breakfasts that start the day right."},
-  items:[
-   ["آفوگاتو","۲۲۰٬۰۰۰"],["آیس لاته","۲۴۰٬۰۰۰"],["آیس موکا","۲۶۰٬۰۰۰"],["آیس ماچا","۲۶۰٬۰۰۰"],
-   ["شیک اسپرسو",null],["شیک بادام‌زمینی",null],["شیر انبه",null],["لیموناد","۲۰۰٬۰۰۰"],
-   ["دمنوش روز",null],["کیک روز","۱۶۰٬۰۰۰"],["املت","۲۲۰٬۰۰۰"],["کوکی پروتئینی",null],["کلاب پروتئین",null]]},
- food:{desc:{fa:"برای وقتی که قهوه تنها کافی نیست؛ برگر و ساندویچِ درست‌وحسابی، با همان وسواسِ فنجان‌هایمان.",en:"For when coffee alone isn't enough — proper burgers and sandwiches, made with the same obsession as our cups."},
-  items:[
-   ["برگر گوشت","۴۸۰٬۰۰۰"],["برگر بوقلمون","۴۰۰٬۰۰۰"],["ساندویچ فیله","۴۶۰٬۰۰۰"],["سینی فیله","۴۰۰٬۰۰۰"],
-   ["ساندویچ مارشال (۳ تکه)","۶۸۰٬۰۰۰"],["سالاد سزار فیله",null],["کلاب تخم‌مرغ",null]]}
+
+var TABS={
+ hot:{dfa:"از اسپرسوی تندِ صبحگاهی تا هات‌چاکلتِ آرامِ عصر؛ هر فنجان، با دانه‌ی تازه و حوصله‌ی کامل.",
+      den:"From a bold morning espresso to a slow evening hot chocolate — every cup with fresh beans and full care."},
+ cold:{dfa:"خنکای تابستان، شیرینیِ همراه قهوه، و صبحانه‌ای که روز را خوب شروع می‌کند.",
+      den:"Summer coolers, sweets made for coffee, and breakfasts that start the day right."},
+ food:{dfa:"برای وقتی که قهوه تنها کافی نیست؛ برگر و ساندویچِ درست‌وحسابی، با همان وسواسِ فنجان‌هایمان.",
+      den:"For when coffee alone isn't enough — proper burgers and sandwiches, made with the same obsession as our cups."}
 };
-var PHOTOS=14;
 
-/* ---------- build journey beats ---------- */
+/* tab, fa, en, price (null = no price), desc fa/en, photo file, object-position */
+var MENU=[
+ ["hot","اسپرسو تک","Espresso","۸۰٬۰۰۰","شات غلیظ و عمیق با کرمای طلایی؛ شروع هر روز خوب.","A thick, deep shot with golden crema — the start of every good day.","espresso","50% 40%"],
+ ["hot","اسپرسو دبل","Espresso","۱۰۰٬۰۰۰","دو برابر شدت، دو برابر عطر؛ برای روزهای جدی.","Twice the intensity, twice the aroma — for serious days.","espresso","50% 68%"],
+ ["hot","آمریکانو","Americano","۱۲۰٬۰۰۰","ساده و صاف، طعم واقعی دانه بدون هیچ پرده‌ای.","Simple and straight — the bean's true flavour, no filter.","americano","50% 50%"],
+ ["hot","کورتادو","Cortado","۱۳۰٬۰۰۰","تعادل دقیق اسپرسو و شیر؛ کوچک اما کامل.","A precise balance of espresso and milk — small but complete.","cortado","50% 50%"],
+ ["hot","لاته","Latte","۲۰۰٬۰۰۰","ابریشم شیر روی اسپرسو، با امضای کاج نوژه.","Silky milk over espresso, signed with the Nozhe pine.","latte","50% 50%"],
+ ["hot","موکا","Mocha","۲۲۰٬۰۰۰","دیدار قهوه و شکلات؛ شیرین، گرم و دلنشین.","Where coffee meets chocolate — sweet, warm, and comforting.","mocha","50% 50%"],
+ ["hot","ماسالا","Masala Chai","۱۸۰٬۰۰۰","ادویه‌های گرم شرقی در آغوش شیر داغ.","Warm eastern spices cradled in hot milk.","masala-chai","50% 50%"],
+ ["hot","قهوه ماسالا","Masala Coffee","۱۳۰٬۰۰۰","اسپرسو با ضربه‌ی ادویه؛ بیدارکننده‌ای متفاوت.","Espresso with a spice kick — a different kind of wake-up.","masala-chai","50% 22%"],
+ ["hot","چای کرک","Karak Tea","۱۸۰٬۰۰۰","چای غلیظ عربی با شیر و هل؛ آرامش در فنجان.","Bold Arabic tea with milk and cardamom — calm in a cup.","karak-tea","50% 50%"],
+ ["hot","کاپوچینو","Cappuccino","۱۶۰٬۰۰۰","کلاسیک ایتالیایی با فوم مخملی و پودر کاکائو.","The Italian classic with velvety foam and cocoa dust.","cappuccino","50% 50%"],
+ ["hot","شیر نسکافه","Instant Coffee","۱۵۰٬۰۰۰","خاطره‌ی شیرین قدیمی؛ ساده، گرم و صمیمی.","A sweet old memory — simple, warm, and familiar.","instant-coffee","50% 50%"],
+ ["hot","هات‌چاکلت","Hot Chocolate","۲۴۰٬۰۰۰","شکلات ذوب‌شده‌ی غلیظ؛ آغوش گرم روزهای سرد.","Thick melted chocolate — a warm hug for cold days.","hot-chocolate","50% 50%"],
+ ["hot","وایت‌چاکلت","White Hot Chocolate",null,"شکلات سفید کرمی و لطیف؛ شیرینیِ ملایم عصر.","Creamy, delicate white chocolate — a gentle afternoon sweetness.","white-hot-chocolate","50% 50%"],
+ ["hot","ماچا لاته","Matcha Latte","۲۲۰٬۰۰۰","سبزِ ژاپنی با انرژی آرام؛ تلخیِ لطیف و تازه.","Japanese green with calm energy — a fresh, gentle bitterness.","matcha-latte","50% 50%"],
+ ["cold","آفوگاتو","Affogato","۲۲۰٬۰۰۰","بستنی وانیلی زیر باران اسپرسوی داغ؛ تضادِ دوست‌داشتنی.","Vanilla gelato under a rain of hot espresso — a lovely contrast.","affogato","50% 50%"],
+ ["cold","آیس لاته","Iced Latte","۲۴۰٬۰۰۰","خنک و ابریشمی؛ لاته‌ی تابستانیِ همیشگی.","Cool and silky — the eternal summer latte.","iced-latte","50% 50%"],
+ ["cold","آیس موکا","Iced Mocha","۲۶۰٬۰۰۰","شکلات و قهوه روی یخ؛ خنکای شکلاتیِ جانانه.","Chocolate and coffee over ice — a serious chocolate chill.","iced-mocha","50% 50%"],
+ ["cold","آیس ماچا","Iced Matcha","۲۶۰٬۰۰۰","سبزِ خنک و پرانرژی؛ تازگی در هر جرعه.","Cool, energising green — freshness in every sip.","iced-matcha","50% 50%"],
+ ["cold","شیک اسپرسو","Espresso Shake",null,"اسپرسو و بستنیِ هم‌زده؛ دسر و قهوه در یک لیوان.","Blended espresso and ice cream — dessert and coffee in one glass.","espresso-shake","50% 50%"],
+ ["cold","شیک بادام‌زمینی","Peanut Shake",null,"کرمی، مغذی و سیرکننده؛ انرژیِ واقعی در لیوان.","Creamy, nourishing, and filling — real energy in a glass.","peanut-shake","50% 50%"],
+ ["cold","شیر انبه","Mango Shake",null,"انبه‌ی رسیده با شیر سرد؛ طعم تابستانِ استوایی.","Ripe mango with cold milk — a taste of tropical summer.","mango-shake","50% 50%"],
+ ["cold","لیموناد","Lemonade","۲۰۰٬۰۰۰","ترش و تازه با نعناع؛ نجات‌دهنده‌ی روزهای گرم.","Sour and fresh with mint — the saviour of hot days.","lemonade","50% 50%"],
+ ["cold","دمنوش روز","Herbal Tea",null,"ترکیب هر روزِ ما از گیاهان آرام‌بخش؛ بپرسید امروز چیست.","Our daily blend of calming herbs — ask what's brewing today.","karak-tea","50% 30%"],
+ ["cold","کیک روز","Cake","۱۶۰٬۰۰۰","تازه از فر، هر روز یک سورپرایز؛ همراهِ وفادار قهوه.","Fresh from the oven, a new surprise daily — coffee's loyal companion.","cake","50% 55%"],
+ ["cold","املت","Omelette","۲۲۰٬۰۰۰","تخم‌مرغِ تازه با سبزیجات؛ صبحانه‌ای که سیرت می‌کند.","Fresh eggs with vegetables — a breakfast that truly satisfies.","omelette","50% 50%"],
+ ["cold","کوکی پروتئینی","Protein Cookie",null,"شیرینیِ بدون عذاب وجدان؛ پروتئین با طعم کوکی.","Sweetness without the guilt — protein that tastes like a cookie.","cake","50% 18%"],
+ ["cold","کلاب پروتئین","Protein Club",null,"میان‌وعده‌ی پرانرژی ورزشکاران؛ سبک اما مقوی.","The athlete's power snack — light but mighty.","club-sandwich","50% 50%"],
+ ["food","برگر گوشت","Beef Burger","۴۸۰٬۰۰۰","گوشت آبدارِ گریل‌شده در نان تازه؛ برگرِ واقعی.","Juicy grilled beef in fresh bread — a real burger.","beef-burger","50% 50%"],
+ ["food","برگر بوقلمون","Turkey Burger","۴۰۰٬۰۰۰","سبک‌تر اما پرطعم؛ انتخاب هوشمندِ برگردوستان.","Lighter yet full of flavour — the smart burger-lover's pick.","turkey-burger","50% 50%"],
+ ["food","ساندویچ فیله","Chicken Sandwich","۴۶۰٬۰۰۰","فیله‌ی مرغِ مرینیت‌شده با سس مخصوص نوژه.","Marinated chicken fillet with Nozhe's special sauce.","chicken-sandwich","50% 50%"],
+ ["food","سینی فیله","Chicken Platter","۴۰۰٬۰۰۰","فیله‌ی گریل با مخلفات؛ برای اشتهای جدی.","Grilled fillet with sides — for serious appetites.","chicken-platter","50% 50%"],
+ ["food","ساندویچ مارشال (۳ تکه)","Club Sandwich","۶۸۰٬۰۰۰","سه‌تکه‌ی پر و پیمان؛ غولِ منوی ما برای شریک‌شدن.","A generous triple stack — our menu's giant, made for sharing.","club-sandwich","28% 62%"],
+ ["food","سالاد سزار فیله","Caesar Salad",null,"کاهوی ترد، فیله‌ی گریل و سس سزار؛ سبک و شیک.","Crisp lettuce, grilled fillet, Caesar dressing — light and classy.","caesar-salad","50% 50%"],
+ ["food","کلاب تخم‌مرغ","Club Sandwich",null,"کلاب‌ساندویچِ خانگی با تخم‌مرغ؛ ساده و سیرکننده.","A homestyle egg club sandwich — simple and satisfying.","club-sandwich","72% 28%"]
+];
+
+/* gallery: file, fa caption, en caption, featured-tall */
+var GALLERY=[
+ ["photo-01","ویترین نوژه","The Nozhe storefront",true],
+ ["photo-02","ورودی کافه","Café entrance",false],
+ ["photo-03","نیمکت خیابانی","Street-side benches",false],
+ ["photo-04","درب شیشه‌ای","The glass door",false],
+ ["photo-05","تابلوی نوژه","The Nozhe sign",false],
+ ["photo-06","بارِ چوبی","The wooden bar",true],
+ ["photo-07","قفسه‌ی دانه‌ها","The bean shelves",false],
+ ["photo-08","گوشه‌ی دنج","A cozy corner",false],
+ ["photo-09","تابلوی منو","The menu board",true],
+ ["photo-10","میز و نور","Table and light",false],
+ ["photo-11","منوی دیواری","The wall menu",false],
+ ["photo-12","یخچال نوشیدنی","The drinks fridge",false],
+ ["photo-13","گوشه‌ی اسپرسو","The espresso corner",false],
+ ["photo-14","نمای نزدیک","Up close",false]
+];
+
+var STR={
+ priceLbl:{fa:"قیمت",en:"Price"},
+ unit:{fa:"تومان",en:"Toman"},
+ order:{fa:"سفارش در واتساپ — به‌زودی",en:"Order on WhatsApp — coming soon"},
+ close:{fa:"بستن",en:"Close"},
+ heroUnmute:{fa:"پخش با صدا",en:"Play with sound"},
+ heroMute:{fa:"بی‌صدا",en:"Mute"},
+ photoAlt:{fa:"کافه نوژه",en:"Café Nozhe"},
+ openItem:{fa:"مشاهده‌ی جزئیات",en:"View details"},
+ openFrame:{fa:"نمایش بزرگ",en:"View larger"}
+};
+
+/* ================= journey beats ================= */
 var track=document.getElementById("jTrack");
-BEATS.forEach(function(b,i){
-  var d=document.createElement("div");d.className="beat";
-  d.innerHTML='<div class="beat-num" data-i="'+i+'">'+b.n+'</div>'+
-    '<div class="beat-body"><h3 data-fa="'+b.t.fa+'" data-en="'+b.t.en+'">'+b.t.fa+'</h3>'+
-    '<p data-fa="'+b.d.fa+'" data-en="'+b.d.en+'">'+b.d.fa+'</p></div>';
-  track.appendChild(d);
-});
-
-/* ---------- build menu panels ---------- */
-var panels=document.getElementById("menuPanels");
-Object.keys(MENU).forEach(function(key,idx){
-  var m=MENU[key],p=document.createElement("div");
-  p.className="menu-panel"+(idx===0?" active":"");p.id="panel-"+key;p.setAttribute("role","tabpanel");
-  var h='<p class="menu-desc" data-fa="'+m.desc.fa+'" data-en="'+m.desc.en+'">'+m.desc.fa+'</p><ul class="menu-list">';
-  m.items.forEach(function(it){
-    var price=it[1]
-      ?'<span class="mi-dots" aria-hidden="true"></span><span class="mi-price">'+it[1]+' <span class="unit" data-fa="تومان" data-en="">تومان</span></span>'
-      :'<span class="mi-dots" aria-hidden="true"></span><span class="mi-noprice">—</span>';
-    h+='<li class="menu-item"><span class="mi-name">'+it[0]+'</span>'+price+'</li>';
+function renderBeats(){
+  while(track.children.length>2)track.removeChild(track.lastChild);
+  BEATS.forEach(function(b,i){
+    var d=document.createElement("div");d.className="beat";
+    d.innerHTML='<div class="beat-num">'+(lang==="fa"?b.n:EN_NUM[i])+'</div>'+
+      '<div class="beat-body"><h3>'+(lang==="fa"?b.t.fa:b.t.en)+'</h3>'+
+      '<p>'+(lang==="fa"?b.d.fa:b.d.en)+'</p></div>';
+    track.appendChild(d);
+    bio.observe(d);
   });
-  p.innerHTML=h+'</ul>';panels.appendChild(p);
-});
-
-/* ---------- build gallery ---------- */
-var grid=document.getElementById("gGrid");
-for(var i=1;i<=PHOTOS;i++){
-  var n=("0"+i).slice(-2),a=document.createElement("button");
-  a.className="g-item";a.style.cssText="border:none;padding:0;cursor:zoom-in;font:inherit";
-  a.setAttribute("aria-label","عکس "+i+" کافه نوژه");
-  a.innerHTML='<img loading="lazy" src="assets/media/photos/photo-'+n+'.webp" alt="کافه نوژه — عکس '+i+'">';
-  (function(src){a.addEventListener("click",function(){openLB(src);});})("assets/media/photos/photo-"+n+".webp");
-  grid.appendChild(a);
+  beats=Array.prototype.slice.call(track.querySelectorAll(".beat"));
+  jProgress();
 }
 
-/* ---------- lightbox ---------- */
-var lb=document.getElementById("lightbox"),lbImg=document.getElementById("lbImg");
-function openLB(src){lbImg.src=src;lb.classList.add("open");document.body.style.overflow="hidden";}
-function closeLB(){lb.classList.remove("open");lbImg.src="";document.body.style.overflow="";}
-document.getElementById("lbClose").addEventListener("click",closeLB);
-lb.addEventListener("click",function(e){if(e.target===lb)closeLB();});
-document.addEventListener("keydown",function(e){if(e.key==="Escape")closeLB();});
-
-/* ---------- menu tabs ---------- */
-document.getElementById("menuTabs").addEventListener("click",function(e){
-  var t=e.target.closest(".tab");if(!t)return;
-  document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");});
-  document.querySelectorAll(".menu-panel").forEach(function(x){x.classList.remove("active");});
-  t.classList.add("active");
-  document.getElementById("panel-"+t.dataset.tab).classList.add("active");
+/* ================= menu panels ================= */
+var panelsEl=document.getElementById("menuPanels");
+function priceHTML(p){
+  if(p)return '<span class="pr">'+p+' <span class="unit">'+STR.unit[lang]+'</span></span>';
+  return '<span class="nopr" aria-label="'+(lang==="fa"?"بدون قیمت":"No price")+'">—</span>';
+}
+function renderMenu(){
+  panelsEl.innerHTML="";
+  ["hot","cold","food"].forEach(function(key,idx){
+    var p=document.createElement("div");
+    p.className="menu-panel"+(idx===0?" active":"");
+    p.id="panel-"+key;p.setAttribute("role","tabpanel");
+    var desc='<p class="menu-desc">'+(lang==="fa"?TABS[key].dfa:TABS[key].den)+'</p>';
+    var grid='<div class="m-grid">';
+    MENU.forEach(function(it,mi){
+      if(it[0]!==key)return;
+      var nm=lang==="fa"?it[1]:it[2];
+      grid+='<button class="m-card" data-mi="'+mi+'" aria-label="'+nm+' — '+(it[3]||"—")+' — '+STR.openItem[lang]+'">'+
+        '<span class="ph"><img loading="lazy" decoding="async" src="assets/menu/'+it[6]+'.jpg" alt="'+(lang==="fa"?it[1]:it[2])+'" style="object-position:'+it[7]+'"></span>'+
+        '<span class="tx"><span class="nm">'+nm+'</span><br><span class="en">'+it[2]+'</span>'+priceHTML(it[3])+'</span>'+
+      '</button>';
+    });
+    p.innerHTML=desc+grid+'</div>';
+    panelsEl.appendChild(p);
+  });
+  staggerCards(document.querySelector(".menu-panel.active"));
+}
+function staggerCards(panel){
+  if(!panel)return;
+  var cards=panel.querySelectorAll(".m-card");
+  cards.forEach(function(c,i){
+    c.style.animation="none";void c.offsetWidth;
+    c.style.animation="";
+    if(i<8)c.style.animationDelay=(i*40)+"ms";else c.style.animationDelay="0ms";
+  });
+}
+panelsEl.addEventListener("click",function(e){
+  var c=e.target.closest(".m-card");if(!c)return;
+  openModal(+c.dataset.mi,c);
 });
 
-/* ---------- language ---------- */
+/* menu tabs */
+var tabsEl=document.getElementById("menuTabs");
+tabsEl.addEventListener("click",function(e){
+  var t=e.target.closest(".tab");if(!t)return;
+  tabsEl.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");x.setAttribute("aria-selected","false");});
+  panelsEl.querySelectorAll(".menu-panel").forEach(function(x){x.classList.remove("active");});
+  t.classList.add("active");t.setAttribute("aria-selected","true");
+  var panel=document.getElementById("panel-"+t.dataset.tab);
+  panel.classList.add("active");staggerCards(panel);
+});
+
+/* ================= gallery film-strip ================= */
+var filmEl=document.getElementById("filmStrip");
+function renderGallery(){
+  filmEl.innerHTML="";
+  GALLERY.forEach(function(g,i){
+    var f=document.createElement("button");
+    f.className="frame"+(g[3]?" tall":"");
+    f.setAttribute("aria-label",STR.photoAlt[lang]+" — "+(lang==="fa"?g[1]:g[2])+" — "+STR.openFrame[lang]);
+    var num=("0"+(i+1)).slice(-2);
+    f.innerHTML='<img loading="lazy" decoding="async" src="assets/media/photos/'+g[0]+'.webp" alt="'+STR.photoAlt[lang]+" — "+(lang==="fa"?g[1]:g[2])+'">'+
+      '<span class="fnum">'+num+'</span>'+
+      '<span class="fcap">'+(lang==="fa"?g[1]:g[2])+'</span>';
+    f.addEventListener("click",function(){openLB(i);});
+    filmEl.appendChild(f);
+  });
+}
+var film=document.getElementById("filmStrip");
+function filmStep(){var fr=film.querySelector(".frame");return fr?fr.offsetWidth+20:300;}
+document.getElementById("filmPrev").addEventListener("click",function(){film.scrollBy({left:-(html.dir==="rtl"?-1:1)*filmStep(),behavior:"smooth"});});
+document.getElementById("filmNext").addEventListener("click",function(){film.scrollBy({left:(html.dir==="rtl"?-1:1)*filmStep(),behavior:"smooth"});});
+
+/* ================= item modal ================= */
+var modalOv=document.getElementById("modalOv"),modalPanel=document.getElementById("modalPanel"),
+    lastFocus=null,modalMi=-1;
+function fillModal(mi){
+  var it=MENU[mi];
+  document.getElementById("modalPhoto").src="assets/menu/"+it[6]+".jpg";
+  document.getElementById("modalPhoto").style.objectPosition=it[7];
+  document.getElementById("modalPhoto").alt=lang==="fa"?it[1]:it[2];
+  document.getElementById("modalName").textContent=lang==="fa"?it[1]:it[2];
+  document.getElementById("modalEn").textContent=it[2];
+  document.getElementById("modalDesc").textContent=lang==="fa"?it[4]:it[5];
+  document.getElementById("modalPriceLbl").textContent=STR.priceLbl[lang];
+  var mprice=document.getElementById("modalPriceLbl").parentElement;
+  var old=mprice.querySelector(".noval");if(old)old.remove();
+  if(it[3]){
+    document.getElementById("modalPriceVal").textContent=it[3];
+    document.getElementById("modalPriceVal").style.display="";
+    document.getElementById("modalPriceUnit").textContent=STR.unit[lang];
+  }else{
+    document.getElementById("modalPriceVal").style.display="none";
+    document.getElementById("modalPriceUnit").textContent="";
+    var lbl=document.getElementById("modalPriceLbl");
+    var nv=document.createElement("span");nv.className="noval";nv.textContent="—";
+    lbl.parentElement.insertBefore(nv,lbl.nextSibling);
+  }
+  document.getElementById("orderCta").textContent=STR.order[lang];
+  document.getElementById("modalX").setAttribute("aria-label",STR.close[lang]);
+}
+function openModal(mi,fromEl){
+  modalMi=mi;fillModal(mi);
+  lastFocus=fromEl||document.activeElement;
+  modalOv.classList.add("open");document.body.style.overflow="hidden";
+  document.getElementById("modalX").focus();
+}
+function closeModal(){
+  if(!modalOv.classList.contains("open"))return;
+  var panel=document.getElementById("modalPanel");
+  panel.classList.add("closing");
+  setTimeout(function(){
+    modalOv.classList.remove("open");panel.classList.remove("closing");
+    document.body.style.overflow="";
+    if(lastFocus&&lastFocus.focus)lastFocus.focus();
+  },250);
+}
+document.getElementById("modalX").addEventListener("click",closeModal);
+modalOv.addEventListener("click",function(e){if(e.target===modalOv)closeModal();});
+
+/* ================= lightbox ================= */
+var lb=document.getElementById("lightbox"),lbImg=document.getElementById("lbImg"),lbI=0;
+function faNum(n){return lang==="fa"?String(n).replace(/[0-9]/g,function(d){return "۰۱۲۳۴۵۶۷۸۹"[+d];}):String(n);}
+function showLB(){
+  var g=GALLERY[lbI];
+  lbImg.src="assets/media/photos/"+g[0]+".webp";
+  lbImg.alt=STR.photoAlt[lang]+" — "+(lang==="fa"?g[1]:g[2]);
+  document.getElementById("lbCap").textContent=lang==="fa"?g[1]:g[2];
+  document.getElementById("lbCount").textContent=lang==="fa"
+    ?faNum(lbI+1)+" از "+faNum(GALLERY.length)
+    :((lbI+1)+" of "+GALLERY.length);
+}
+function openLB(i){lbI=i;showLB();lb.classList.add("open");document.body.style.overflow="hidden";document.getElementById("lbClose").focus();}
+function closeLB(){lb.classList.remove("open");lbImg.src="";document.body.style.overflow="";}
+function lbGo(d){lbI=(lbI+d+GALLERY.length)%GALLERY.length;showLB();}
+document.getElementById("lbClose").addEventListener("click",closeLB);
+document.getElementById("lbPrev").addEventListener("click",function(){lbGo(-1);});
+document.getElementById("lbNext").addEventListener("click",function(){lbGo(1);});
+lb.addEventListener("click",function(e){if(e.target===lb)closeLB();});
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape"){closeLB();closeModal();}
+  if(lb.classList.contains("open")){
+    var fwd=html.dir==="rtl"?-1:1;
+    if(e.key==="ArrowRight")lbGo(-fwd);
+    if(e.key==="ArrowLeft")lbGo(fwd);
+  }
+});
+/* touch swipe for lightbox */
+var tx0=null;
+lb.addEventListener("touchstart",function(e){tx0=e.touches[0].clientX;},{passive:true});
+lb.addEventListener("touchend",function(e){
+  if(tx0===null)return;var dx=e.changedTouches[0].clientX-tx0;tx0=null;
+  if(Math.abs(dx)<40)return;
+  var fwd=html.dir==="rtl"?-1:1;
+  lbGo(dx>0?-fwd:fwd);
+},{passive:true});
+
+/* ================= language ================= */
 function applyLang(l){
   lang=l;localStorage.setItem("nozhe-lang",l);
   html.lang=l;html.dir=(l==="fa"?"rtl":"ltr");
@@ -439,35 +782,50 @@ function applyLang(l){
     var v=el.getAttribute("data-"+l);
     if(v!==null)el.textContent=v;
   });
-  document.querySelectorAll(".beat-num").forEach(function(el){
-    el.textContent=(l==="fa"?BEATS[+el.dataset.i].n:EN_NUM[+el.dataset.i]);
-  });
+  renderBeats();renderMenu();renderGallery();
+  if(modalOv.classList.contains("open")&&modalMi>=0)fillModal(modalMi);
+  if(lb.classList.contains("open"))showLB();
   document.getElementById("langToggle").textContent=(l==="fa"?"EN":"فا");
   document.title=(l==="fa"?"کافه نوژه — از دانه تا فنجان":"Café Nozhe — From Bean to Cup");
+  document.getElementById("lbClose").setAttribute("aria-label",STR.close[lang]);
 }
 document.getElementById("langToggle").addEventListener("click",function(){applyLang(lang==="fa"?"en":"fa");});
-applyLang(lang);
 
-/* ---------- reveal on scroll ---------- */
+/* ================= reveal on scroll ================= */
 var io=new IntersectionObserver(function(es){
   es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});
 },{threshold:.12});
 document.querySelectorAll(".reveal").forEach(function(el){io.observe(el);});
 
-/* ---------- journey progress ---------- */
-var beats=[].slice.call(document.querySelectorAll(".beat")),fill=document.getElementById("jFill");
+/* ================= journey progress ================= */
+var beats=[],fill=document.getElementById("jFill");
 var bio=new IntersectionObserver(function(es){
   es.forEach(function(e){if(e.isIntersecting)e.target.classList.add("on");});
 },{threshold:.55,rootMargin:"-40% 0px -40% 0px"});
-beats.forEach(function(b){bio.observe(b);});
 function jProgress(){
   var r=track.getBoundingClientRect(),vh=window.innerHeight;
   var p=Math.min(1,Math.max(0,(vh*.6-r.top)/r.height));
   fill.style.height=(p*100)+"%";
 }
-window.addEventListener("scroll",jProgress,{passive:true});jProgress();
+window.addEventListener("scroll",jProgress,{passive:true});
 
-/* ---------- hero video: lazy, muted autoplay + unmute ---------- */
+/* ================= Ken Burns parallax ================= */
+var kbFrame=document.getElementById("kbFrame"),kbBand=document.getElementById("kbBand"),
+    reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    coarse=window.matchMedia("(pointer: coarse)").matches||window.innerWidth<760;
+function kbPar(){
+  if(reduced||coarse)return;
+  var r=kbBand.getBoundingClientRect(),vh=window.innerHeight;
+  if(r.bottom<0||r.top>vh)return;
+  var c=(r.top+r.height/2)-vh/2;
+  var max=vh/2+r.height/2;
+  var y=Math.max(-1,Math.min(1,c/max))*40;
+  kbFrame.style.transform="translateY("+(-y).toFixed(1)+"px)";
+}
+window.addEventListener("scroll",function(){window.requestAnimationFrame(kbPar);},{passive:true});
+kbPar();
+
+/* ================= hero video ================= */
 var vid=document.getElementById("heroVideo"),poster=document.getElementById("heroPoster"),
     unmute=document.getElementById("unmuteBtn"),started=false;
 function startVideo(){
@@ -486,12 +844,16 @@ if("IntersectionObserver" in window){
 unmute.addEventListener("click",function(){
   vid.muted=!vid.muted;
   unmute.querySelector("span:last-child").textContent=
-    vid.muted?(lang==="fa"?"پخش با صدا":"Play with sound"):(lang==="fa"?"بی‌صدا":"Mute");
+    vid.muted?STR.heroUnmute[lang]:STR.heroMute[lang];
 });
 document.addEventListener("visibilitychange",function(){
   if(!started)return;
   if(document.hidden)vid.pause();else{var p=vid.play();if(p&&p.catch)p.catch(function(){});}
 });
+
+/* ================= boot ================= */
+applyLang(lang);
+jProgress();
 })();
 </script>
 </body>
