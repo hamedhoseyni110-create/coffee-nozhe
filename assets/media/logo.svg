@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 220" role="img" aria-label="Coffee Nozhe — pine tree in a coffee cup">
+  <!-- Cup body (open top) -->
+  <path d="M40,96 C40,146 64,172 105,172 C146,172 170,146 170,96"
+        fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+  <!-- Cup rim -->
+  <ellipse cx="105" cy="96" rx="65" ry="11"
+        fill="none" stroke="currentColor" stroke-width="9"/>
+  <!-- Handle -->
+  <path d="M168,104 C196,104 196,142 166,144"
+        fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+  <!-- Saucer -->
+  <ellipse cx="105" cy="188" rx="88" ry="12"
+        fill="none" stroke="currentColor" stroke-width="9"/>
+  <!-- Pine tree silhouette (filled) -->
+  <g fill="currentColor">
+    <path d="M105,24 L90,52 Q105,40 120,52 Z"/>
+    <path d="M105,46 L82,76 Q105,62 128,76 Z"/>
+    <path d="M105,68 L74,100 Q105,86 136,100 Z"/>
+    <path d="M105,90 L66,124 Q105,110 144,124 Z"/>
+    <path d="M105,112 L58,148 Q105,134 152,148 Z"/>
+    <rect x="101" y="130" width="8" height="36"/>
+  </g>
+</svg>
