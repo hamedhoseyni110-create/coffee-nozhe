@@ -414,7 +414,7 @@ footer .f-en{opacity:.7;font-size:.85rem;margin-block-start:.3rem}
 
 <header>
   <div class="wrap nav">
-    <a class="brand" href="#top" aria-label="کافه نوژه">
+    <a class="brand" href="#top" id="brandLink" aria-label="کافه نوژه">
       <svg viewBox="0 0 240 220" aria-hidden="true"><use href="#nozhe-logo"/></svg>
       <span data-fa="کافه نوژه" data-ar="مقهى نوژه" data-en="Café Nozhe">کافه نوژه</span>
     </a>
@@ -458,7 +458,7 @@ footer .f-en{opacity:.7;font-size:.85rem;margin-block-start:.3rem}
 <main id="top">
 
 <!-- ============ HERO ============ -->
-<section class="hero" aria-label="هیرو">
+<section class="hero" id="heroSec" aria-label="هیرو">
   <div class="hero-media">
     <img id="heroPoster" src="assets/media/hero-poster.jpg" alt="" fetchpriority="high">
     <video id="heroVideo" muted loop playsinline preload="none" poster="assets/media/hero-poster.jpg" aria-label="ویدیوی هیرو کافه نوژه"></video>
@@ -561,7 +561,7 @@ footer .f-en{opacity:.7;font-size:.85rem;margin-block-start:.3rem}
   <div class="wrap">
     <div class="reveal">
       <span class="kicker" data-fa="تماس و نشانی" data-ar="زورونا" data-en="Visit Us">تماس و نشانی</span>
-      <h2 data-fa="ما را پیدا کنید" data-ar="جدونا" data-en="Find Us">ما را پیدا کنید</h2>
+      <h2 data-fa="ما را پیدا کنید" data-ar="اعثر علينا" data-en="Find Us">ما را پیدا کنید</h2>
       <p class="lead" data-fa="کافه نوژه در اصفهان است — میان همین خیابان‌هایی که دوستشان داریم. بیایید، بنشینید، و بگذارید فنجانتان را ما انتخاب کنیم." data-ar="مقهى نوژه في أصفهان — بين هذه الشوارع التي نحبها. تفضلوا، اجلسوا، ودعونا نختار لكم فنجانكم." data-en="Café Nozhe is in Isfahan — among the very streets we love. Come in, sit down, and let us choose your cup.">کافه نوژه در اصفهان است — میان همین خیابان‌هایی که دوستشان داریم. بیایید، بنشینید، و بگذارید فنجانتان را ما انتخاب کنیم.</p>
     </div>
     <div class="visit-cards reveal">
@@ -648,7 +648,7 @@ footer .f-en{opacity:.7;font-size:.85rem;margin-block-start:.3rem}
 var html=document.documentElement, lang=localStorage.getItem("nozhe-lang")||"fa";
 if(!/^(fa|en|ar)$/.test(lang))lang="fa";
 function t3(fa,en,ar){return lang==="ar"?ar:(lang==="en"?en:fa);}
-function locDigits(x){return String(x).replace(/[۰۱۲۳۴۵۶۷۸۹]/g,function(d){return lang==="ar"?"٠١٢٣٤٥٦٧٨٩"["۰۱۲۳۴۵۶۷۸۹".indexOf(d)]:d;});}
+function locDigits(x){var src="۰۱۲۳۴۵۶۷۸۹";if(lang==="en")return String(x).replace(/٬/g,",").replace(/[۰۱۲۳۴۵۶۷۸۹]/g,function(d){return "0123456789"[src.indexOf(d)];});if(lang==="ar")return String(x).replace(/[۰۱۲۳۴۵۶۷۸۹]/g,function(d){return "٠١٢٣٤٥٦٧٨٩"[src.indexOf(d)];});return String(x);}
 var AR_NUM=["١","٢","٣","٤","٥","٦","٧","٨"];
 
 /* ================= data ================= */
@@ -709,9 +709,9 @@ var MENU=[
  ["food","برگر بوقلمون","Turkey Burger","۴۰۰٬۰۰۰","سبک‌تر اما پرطعم؛ انتخاب هوشمندِ برگردوستان.","Lighter yet full of flavour — the smart burger-lover's pick.","turkey-burger","50% 50%","برجر الديك الرومي","أخف لكنه غني بالنكهة؛ خيار ذكي لعشاق البرجر."],
  ["food","ساندویچ فیله","Chicken Sandwich","۴۶۰٬۰۰۰","فیله‌ی مرغِ مرینیت‌شده با سس مخصوص نوژه.","Marinated chicken fillet with Nozhe's special sauce.","chicken-sandwich","50% 50%","ساندويتش فيليه الدجاج","فيليه دجاج متبل بصلصة نوژه الخاصة."],
  ["food","سینی فیله","Chicken Platter","۴۰۰٬۰۰۰","فیله‌ی گریل با مخلفات؛ برای اشتهای جدی.","Grilled fillet with sides — for serious appetites.","chicken-platter","50% 50%","صينية فيليه الدجاج","فيليه مشوي مع المقبلات؛ للشهية الجادة."],
- ["food","ساندویچ مارشال (۳ تکه)","Club Sandwich","۶۸۰٬۰۰۰","سه‌تکه‌ی پر و پیمان؛ غولِ منوی ما برای شریک‌شدن.","A generous triple stack — our menu's giant, made for sharing.","club-sandwich","28% 62%","كلوب ساندويتش (٣ قطع)","طبقات سخية؛ عملاق قائمتنا للمشاركة."],
+ ["food","ساندویچ مارشال (۳ تکه)","Marshal Club Sandwich","۶۸۰٬۰۰۰","سه‌تکه‌ی پر و پیمان؛ غولِ منوی ما برای شریک‌شدن.","A generous triple stack — our menu's giant, made for sharing.","club-sandwich","28% 62%","كلوب ساندويتش مارشال (٣ قطع)","طبقات سخية؛ عملاق قائمتنا للمشاركة."],
  ["food","سالاد سزار فیله","Caesar Salad",null,"کاهوی ترد، فیله‌ی گریل و سس سزار؛ سبک و شیک.","Crisp lettuce, grilled fillet, Caesar dressing — light and classy.","caesar-salad","50% 50%","سلطة سيزر بالفيليه","خس مقرمش وفيليه مشوي وصلصة السيزر؛ خفيف وأنيق."],
- ["food","کلاب تخم‌مرغ","Club Sandwich",null,"کلاب‌ساندویچِ خانگی با تخم‌مرغ؛ ساده و سیرکننده.","A homestyle egg club sandwich — simple and satisfying.","club-egg","72% 28%","كلوب ساندويتش بالبيض","كلوب ساندويتش بيتي بالبيض؛ بسيط ومشبع."]
+ ["food","کلاب تخم‌مرغ","Egg Club Sandwich",null,"کلاب‌ساندویچِ خانگی با تخم‌مرغ؛ ساده و سیرکننده.","A homestyle egg club sandwich — simple and satisfying.","club-egg","72% 28%","كلوب ساندويتش بالبيض","كلوب ساندويتش بيتي بالبيض؛ بسيط ومشبع."]
 ];
 
 /* gallery: file, fa caption, en caption, featured-tall */
@@ -753,7 +753,16 @@ var STR={
  orderSummary:{fa:"خلاصه‌ی سفارش",en:"Order summary",ar:"ملخص الطلب"},
  payOnline:{fa:"پرداخت آنلاین — به‌زودی",en:"Pay online — coming soon",ar:"الدفع أونلاين — قريباً"},
  payNote:{fa:"پرداخت آنلاین پس از خرید هاست و دامنه فعال می‌شود.",en:"Online payment will be enabled after the host and domain are purchased.",ar:"سيُفعَّل الدفع أونلاين بعد شراء الاستضافة والنطاق."},
- orderWhats:{fa:"ثبت سفارش در واتساپ — به‌زودی",en:"Place order on WhatsApp — coming soon",ar:"تأكيد الطلب عبر واتساب — قريباً"}
+ orderWhats:{fa:"ثبت سفارش در واتساپ — به‌زودی",en:"Place order on WhatsApp — coming soon",ar:"تأكيد الطلب عبر واتساب — قريباً"},
+ langBtn:{fa:"تغییر زبان",en:"Change language",ar:"تغيير اللغة"},
+ brandName:{fa:"کافه نوژه",en:"Café Nozhe",ar:"مقهى نوژه"},
+ heroSec:{fa:"هیرو",en:"Hero",ar:"الواجهة الرئيسية"},
+ heroVideo:{fa:"ویدیوی هیرو کافه نوژه",en:"Café Nozhe hero video",ar:"فيديو الواجهة لمقهى نوژه"},
+ tabList:{fa:"گروه‌های منو",en:"Menu groups",ar:"أقسام القائمة"},
+ prev:{fa:"قبلی",en:"Previous",ar:"السابق"},
+ next:{fa:"بعدی",en:"Next",ar:"التالي"},
+ lbPrev:{fa:"عکس قبلی",en:"Previous photo",ar:"الصورة السابقة"},
+ lbNext:{fa:"عکس بعدی",en:"Next photo",ar:"الصورة التالية"}
 };
 
 /* ================= journey beats ================= */
@@ -780,9 +789,11 @@ function priceHTML(p){
 }
 function renderMenu(){
   panelsEl.innerHTML="";
+  var _at=document.getElementById("menuTabs").querySelector(".tab.active");
+  var _akey=_at?_at.dataset.tab:"hot";
   ["hot","cold","food"].forEach(function(key,idx){
     var p=document.createElement("div");
-    p.className="menu-panel"+(idx===0?" active":"");
+    p.className="menu-panel"+(key===_akey?" active":"");
     p.id="panel-"+key;p.setAttribute("role","tabpanel");
     var desc='<p class="menu-desc">'+(TABS[key][{fa:"dfa",en:"den",ar:"dar"}[lang]])+'</p>';
     var grid='<div class="m-grid">';
@@ -792,7 +803,7 @@ function renderMenu(){
       var addBtn=it[3]
         ?'<span class="add-wrap"><button class="add-btn" data-add="'+mi+'" aria-label="'+STR.add[lang]+' — '+nm+'"><span aria-hidden="true">+</span>'+STR.add[lang]+'</button></span>'
         :'';
-      grid+='<div class="m-card" data-mi="'+mi+'" role="button" tabindex="0" aria-label="'+nm+' — '+(it[3]||"—")+' — '+STR.openItem[lang]+'">'+
+      grid+='<div class="m-card" data-mi="'+mi+'" role="button" tabindex="0" aria-label="'+nm+' — '+(it[3]?locDigits(it[3]):"—")+' — '+STR.openItem[lang]+'">'+
         '<span class="ph"><img loading="lazy" decoding="async" src="assets/menu/'+it[6]+'.jpg" alt="'+(t3(it[1],it[2],it[8]))+'" style="object-position:'+it[7]+'"></span>'+
         '<span class="tx"><span class="nm">'+nm+'</span><br><span class="en">'+it[2]+'</span>'+priceHTML(it[3])+'</span>'+
         addBtn+
@@ -1153,6 +1164,15 @@ function applyLang(l){
   document.getElementById("langToggle").textContent=({fa:"EN",en:"عربي",ar:"فا"})[l];
   document.title=({fa:"کافه نوژه — از دانه تا فنجان",en:"Café Nozhe — From Bean to Cup",ar:"مقهى نوژه — من الحبة إلى الفنجان"})[l];
   document.getElementById("lbClose").setAttribute("aria-label",STR.close[lang]);
+  document.getElementById("langToggle").setAttribute("aria-label",STR.langBtn[lang]);
+  document.getElementById("brandLink").setAttribute("aria-label",STR.brandName[lang]);
+  document.getElementById("heroSec").setAttribute("aria-label",STR.heroSec[lang]);
+  document.getElementById("heroVideo").setAttribute("aria-label",STR.heroVideo[lang]);
+  document.getElementById("menuTabs").setAttribute("aria-label",STR.tabList[lang]);
+  document.getElementById("filmPrev").setAttribute("aria-label",STR.prev[lang]);
+  document.getElementById("filmNext").setAttribute("aria-label",STR.next[lang]);
+  document.getElementById("lbPrev").setAttribute("aria-label",STR.lbPrev[lang]);
+  document.getElementById("lbNext").setAttribute("aria-label",STR.lbNext[lang]);
 }
 document.getElementById("langToggle").addEventListener("click",function(){applyLang(({fa:"en",en:"ar",ar:"fa"})[lang]);});
 
